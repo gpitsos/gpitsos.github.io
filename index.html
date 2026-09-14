@@ -1,622 +1,551 @@
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Γιώργος Πίτσος — Χημικός Μηχανικός</title>
-<meta name="description" content="Πόρτφόλιο του Γιώργου Πίτσου, Χημικού Μηχανικού — process design, ασφάλεια/διαχείριση κινδύνου, project management.">
+<title>Georgios Pitsos — Chemical Engineer</title>
+<meta name="description" content="Portfolio of Georgios Pitsos, Chemical Engineer — process design, safety & risk modeling, project management.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#12211D;
-    --paper:#EEF1EC;
-    --paper-2:#E4E9E3;
-    --teal:#1F6F6B;
-    --teal-dark:#164F4C;
-    --amber:#D98A2B;
-    --line:#C9D0C9;
-    --muted:#4C5B54;
-    --max:920px;
+    --bg:#1B5D8C;
+    --bg-2:rgba(8,28,46,0.62);
+    --bg-3:rgba(8,28,46,0.8);
+    --ink:#F7FAFD;
+    --muted:#CFE4F3;
+    --line:rgba(255,255,255,0.4);
+    --line-soft:rgba(255,255,255,0.16);
+    --line-strong:rgba(255,255,255,0.3);
+    --amber:#F2B040;
+    --max:980px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    background:var(--paper);
+    min-height:100vh;
+    background-color:var(--bg);
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px),
+      linear-gradient(var(--line-strong) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-strong) 1px, transparent 1px),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><g fill='none' stroke='%23FFFFFF' stroke-opacity='0.30' stroke-width='1.5'><path d='M20,10 L20,250'/><path d='M32,10 L32,250'/><rect x='60' y='40' width='26' height='50'/><circle cx='190' cy='60' r='16'/><path d='M120,130 L220,130 L220,190'/><path d='M0,220 L60,220 L90,190' stroke-dasharray='4 4'/><rect x='150' y='200' width='14' height='14' transform='rotate(45 157 207)'/></g></svg>"),
+      linear-gradient(150deg, #164E77 0%, #2C7EAF 45%, #1B5D8C 100%);
+    background-size:16px 16px, 16px 16px, 96px 96px, 96px 96px, 260px 260px, cover;
+    background-repeat:repeat, repeat, repeat, repeat, repeat, no-repeat;
+    background-attachment:scroll, scroll, scroll, scroll, scroll, fixed;
     color:var(--ink);
-    font-family:'Source Serif 4', Georgia, serif;
+    font-family:'IBM Plex Serif', Georgia, serif;
     font-size:17px;
-    line-height:1.6;
+    line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3,h4,.display{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:600;
-    letter-spacing:-0.01em;
+  h1,h2,h3,h4,.mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.01em;
     color:var(--ink);
     margin:0;
   }
-  a{color:var(--teal-dark);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px;}
+  a{color:var(--amber);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px;}
   a:hover{text-decoration-color:currentColor;}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
 
   .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
 
-  /* ---------- process rail ---------- */
-  .rail{
-    position:fixed;
-    top:0;left:0;bottom:0;
-    width:64px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    z-index:20;
-  }
-  .rail svg{overflow:visible;}
-  .rail-dot{
-    fill:var(--paper);
-    stroke:var(--muted);
-    stroke-width:1.5;
-    cursor:pointer;
-    transition:stroke 0.2s ease, fill 0.2s ease, r 0.2s ease;
-  }
-  .rail-dot:hover, .rail-dot.active{
-    fill:var(--teal);
-    stroke:var(--teal);
-  }
-  .rail-label{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:11px;
-    fill:var(--muted);
-    opacity:0;
-    transition:opacity 0.2s ease;
-    pointer-events:none;
-  }
-  .rail-item:hover .rail-label{opacity:1;}
+  /* ---------- view switching (no reload, no new tab) ---------- */
+  .view{display:none;}
+  .view.active{display:block;animation:fadeIn 0.25s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  @media (prefers-reduced-motion: reduce){ .view.active{animation:none;} }
 
-  @media (max-width:880px){
-    .rail{display:none;}
-  }
-
-  main{padding-left:64px;}
-  @media (max-width:880px){ main{padding-left:0;} }
-
-  section{
-    padding:96px 0 0 0;
-    border-top:1px solid var(--line);
-  }
-  section:first-of-type{border-top:none;}
-  .eyebrow{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:13px;
-    color:var(--teal-dark);
-    font-weight:600;
-    margin-bottom:10px;
-  }
-
-  /* ---------- hero ---------- */
-  #hero{
-    padding-top:120px;
-    padding-bottom:80px;
-    border-top:none;
-  }
-  .hero-grid{
+  /* ---------- title block ---------- */
+  .titleblock{
+    border:1px solid var(--line);
+    background:var(--bg-2);
+    backdrop-filter:blur(10px) saturate(130%);
+    -webkit-backdrop-filter:blur(10px) saturate(130%);
+    padding:20px 24px;
     display:grid;
-    grid-template-columns:1.3fr 1fr;
-    gap:48px;
-    align-items:center;
+    grid-template-columns:1fr auto;
+    gap:16px;
+    margin:40px 0 8px;
   }
-  @media (max-width:760px){ .hero-grid{grid-template-columns:1fr;} }
-  #hero h1{
-    font-size:clamp(34px,5vw,52px);
-    line-height:1.05;
-  }
-  .hero-role{
-    margin-top:14px;
-    font-size:19px;
+  .titleblock h1{font-size:clamp(26px,4vw,38px);font-weight:600;}
+  .titleblock .role{
+    font-family:'IBM Plex Serif',serif;
     color:var(--muted);
-    max-width:46ch;
+    font-size:15.5px;
+    margin-top:10px;
+    max-width:52ch;
   }
-  .hero-meta{
-    margin-top:28px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px 22px;
-    font-family:'Space Grotesk',sans-serif;
-    font-size:14px;
+  .meta-grid{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
     color:var(--muted);
+    display:grid;
+    grid-template-columns:auto auto;
+    gap:4px 14px;
+    align-content:start;
+    border-left:1px solid var(--line);
+    padding-left:16px;
+    white-space:nowrap;
   }
-  .hero-meta span{white-space:nowrap;}
-  .hero-links{margin-top:26px;display:flex;gap:20px;flex-wrap:wrap;}
-  .hero-links a{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:15px;}
+  .meta-grid span.k{color:var(--amber);}
+  @media (max-width:640px){
+    .titleblock{grid-template-columns:1fr;}
+    .meta-grid{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:12px;}
+  }
+  .links-row{margin-top:16px;display:flex;gap:18px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:13.5px;}
 
-  /* flow diagram in hero */
-  .flow{width:100%;height:auto;}
-  .flow-line{stroke:var(--muted);stroke-width:1.6;fill:none;}
-  .flow-node{fill:var(--paper);stroke:var(--teal-dark);stroke-width:1.8;}
-  .flow-node.amber{stroke:var(--amber);}
-  .flow-text{font-family:'Space Grotesk',sans-serif;font-size:11.5px;fill:var(--ink);}
+  /* ---------- network diagram (hub) ---------- */
+  .network-wrap{
+    margin:34px 0 50px;
+    border:1px solid var(--line);
+    background:var(--bg-2);
+    backdrop-filter:blur(10px) saturate(130%);
+    -webkit-backdrop-filter:blur(10px) saturate(130%);
+    padding:10px;
+  }
+  .network-wrap svg{width:100%;height:auto;display:block;}
+  .net-link{stroke:var(--line);stroke-width:1.6;}
+  .net-junction{fill:var(--bg-3);stroke:var(--line);stroke-width:1.6;}
+  .node{cursor:pointer;}
+  .node .node-circle{fill:var(--bg-3);stroke:var(--line);stroke-width:1.8;transition:stroke 0.15s ease, fill 0.15s ease;}
+  .node .node-title{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    font-size:14.5px;
+    fill:var(--ink);
+    text-anchor:middle;
+    transition:fill 0.15s ease;
+  }
+  .node:hover .node-circle, .node:focus .node-circle{stroke:var(--amber);}
+  .node:hover .node-title, .node:focus .node-title{fill:var(--amber);}
+  .center-node .center-circle{fill:var(--bg-3);stroke:var(--amber);stroke-width:2.2;}
+  .center-node text{
+    font-family:'IBM Plex Mono',monospace;
+    text-anchor:middle;
+    fill:var(--ink);
+  }
+  .center-node .center-name{font-size:19px;font-weight:700;}
 
-  /* ---------- generic section heads ---------- */
-  .sec-head{
+  /* ---------- detail view chrome ---------- */
+  .view-head{
+    margin-top:36px;
+    padding:20px 24px;
     display:flex;
     justify-content:space-between;
     align-items:baseline;
-    gap:16px;
-    margin-bottom:36px;
     flex-wrap:wrap;
+    gap:10px;
+    border:1px solid var(--line);
+    border-bottom:none;
+    background:var(--bg-2);
+    backdrop-filter:blur(10px) saturate(130%);
+    -webkit-backdrop-filter:blur(10px) saturate(130%);
   }
-  .sec-head h2{font-size:28px;}
-  .sec-head .count{
-    font-family:'Space Grotesk',sans-serif;
+  .back-link{
+    font-family:'IBM Plex Mono',monospace;
     font-size:13px;
+    text-decoration:none;
     color:var(--muted);
+    border:1px solid var(--line);
+    padding:7px 12px;
+  }
+  .back-link:hover{color:var(--amber);border-color:var(--amber);}
+  .view-head .sheet-no{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber);}
+  .view-head h2{font-size:26px;margin-top:6px;}
+
+  .view-body{
+    padding:28px 24px 40px;
+    border:1px solid var(--line);
+    background:var(--bg-2);
+    backdrop-filter:blur(10px) saturate(130%);
+    -webkit-backdrop-filter:blur(10px) saturate(130%);
+    margin-bottom:70px;
   }
 
-  /* ---------- about ---------- */
-  #about p{max-width:66ch;}
-  #about .about-cols{
-    display:grid;
-    grid-template-columns:1.4fr 1fr;
-    gap:40px;
-    padding-bottom:80px;
-  }
-  @media (max-width:760px){ #about .about-cols{grid-template-columns:1fr;} }
-  .fact-list{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:14px;
-    border-left:1px solid var(--line);
-    padding-left:20px;
-  }
-  .fact-list div{padding:10px 0;border-bottom:1px solid var(--line);}
-  .fact-list div:last-child{border-bottom:none;}
-  .fact-list .k{color:var(--muted);display:block;margin-bottom:2px;}
-
-  /* ---------- experience ---------- */
-  #experience{padding-bottom:80px;}
+  /* ---------- role / entry blocks ---------- */
   .role{
     display:grid;
-    grid-template-columns:170px 1fr;
-    gap:24px;
-    padding:26px 0;
+    grid-template-columns:150px 1fr;
+    gap:22px;
+    padding:24px 0;
     border-bottom:1px solid var(--line);
   }
   .role:last-child{border-bottom:none;}
-  @media (max-width:640px){ .role{grid-template-columns:1fr;gap:6px;} }
-  .role-date{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:13px;
-    color:var(--muted);
-    padding-top:3px;
-  }
-  .role h3{font-size:19px;}
-  .role .org{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:14.5px;
-    color:var(--teal-dark);
-    font-weight:500;
-    margin-top:2px;
-  }
+  @media (max-width:600px){ .role{grid-template-columns:1fr;gap:6px;} }
+  .role-date{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted);padding-top:3px;}
+  .role h4{font-size:18px;font-family:'IBM Plex Mono',monospace;font-weight:600;}
+  .role .org{font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:var(--amber);margin-top:4px;}
   .role ul{margin:12px 0 0 0;padding-left:20px;}
   .role li{margin-bottom:6px;}
 
-  /* ---------- featured work ---------- */
-  #work{padding-bottom:80px;}
+  /* ---------- case (thesis/capstone) ---------- */
   .case{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:14px;
-    padding:28px;
-    background:var(--paper-2);
-    border-left:3px solid var(--teal);
-    margin-bottom:22px;
+    border:1px solid var(--line);
+    background:var(--bg-2);
+    padding:26px;
+    margin-bottom:20px;
   }
-  .case h3{font-size:20px;}
-  .case .tag{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:12.5px;
-    color:var(--amber);
-    font-weight:600;
-    margin-bottom:8px;
-  }
-  .case p{margin:0;max-width:70ch;color:var(--ink);}
-  .case .courses{
-    margin-top:10px;
-    font-family:'Space Grotesk',sans-serif;
-    font-size:13px;
-    color:var(--muted);
-  }
+  .case .tag{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber);margin-bottom:10px;}
+  .case h4{font-size:18px;font-family:'IBM Plex Mono',monospace;font-weight:600;line-height:1.4;}
+  .case p{margin:12px 0 0;max-width:70ch;}
+  .case .courses{margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted);}
 
-  /* ---------- skills ---------- */
-  #skills{padding-bottom:80px;}
+  /* ---------- skills grid ---------- */
   .skill-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:0;
-    border-top:1px solid var(--line);
-    border-left:1px solid var(--line);
-  }
-  .skill-cell{
-    padding:20px 22px;
-    border-right:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-  }
-  .skill-cell h4{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:13px;
-    color:var(--muted);
-    font-weight:600;
-    margin-bottom:8px;
-  }
-  .skill-cell .items{font-size:15.5px;}
-
-  /* ---------- certifications ---------- */
-  #training{padding-bottom:80px;}
-  .cert-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:2px;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:1px;
     background:var(--line);
   }
-  @media (max-width:640px){ .cert-grid{grid-template-columns:1fr;} }
-  .cert{
-    background:var(--paper);
-    padding:18px 20px;
-  }
-  .cert .title{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:15px;}
-  .cert .sub{font-size:13.5px;color:var(--muted);margin-top:3px;}
+  .skill-cell{background:var(--bg-2);padding:20px 22px;}
+  .skill-cell h4{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:8px;}
+  .skill-cell .items{font-family:'IBM Plex Serif',serif;font-size:15.5px;}
 
-  /* ---------- beyond ---------- */
-  #beyond{padding-bottom:80px;}
-  .beyond-row{
-    display:flex;
-    gap:28px;
-    flex-wrap:wrap;
-  }
-  .beyond-item{
-    flex:1 1 220px;
-    padding:22px 0;
-    border-top:2px solid var(--ink);
-  }
-  .beyond-item h4{font-family:'Space Grotesk',sans-serif;font-size:16px;margin-bottom:6px;}
-  .beyond-item .since{font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--teal-dark);}
+  /* ---------- cert grid ---------- */
+  .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);}
+  @media (max-width:600px){ .cert-grid{grid-template-columns:1fr;} }
+  .cert{background:var(--bg-2);padding:18px 20px;}
+  .cert .title{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:14px;}
+  .cert .sub{font-family:'IBM Plex Serif',serif;font-size:13.5px;color:var(--muted);margin-top:4px;}
 
-  /* ---------- education ---------- */
-  #education{padding-bottom:80px;}
+  /* ---------- beyond row ---------- */
+  .beyond-row{display:flex;gap:1px;background:var(--line);flex-wrap:wrap;}
+  .beyond-item{flex:1 1 200px;background:var(--bg-2);padding:20px;}
+  .beyond-item h4{font-family:'IBM Plex Mono',monospace;font-size:14.5px;margin-bottom:6px;}
+  .beyond-item .since{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber);}
 
   /* ---------- contact ---------- */
-  #contact{padding-bottom:120px;}
-  .contact-grid{
-    display:grid;
-    grid-template-columns:1.2fr 1fr;
-    gap:40px;
+  .contact-list{font-family:'IBM Plex Mono',monospace;font-size:14.5px;max-width:520px;}
+  .contact-list div{padding:14px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;}
+  .contact-list .k{color:var(--muted);}
+
+  /* ---------- sheet nav (prev/next) ---------- */
+  .sheet-nav{
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid var(--line);
+    padding-top:20px;
+    margin-top:10px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
   }
-  @media (max-width:700px){ .contact-grid{grid-template-columns:1fr;} }
-  #contact h2{font-size:30px;max-width:16ch;}
-  .contact-list{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:15px;
-  }
-  .contact-list div{padding:14px 0;border-bottom:1px solid var(--line);}
-  .contact-list .k{color:var(--muted);font-size:12.5px;display:block;margin-bottom:4px;}
+  .sheet-nav a{color:var(--muted);text-decoration:none;}
+  .sheet-nav a:hover{color:var(--amber);}
 
   footer{
-    padding:26px 0 50px;
-    font-family:'Space Grotesk',sans-serif;
-    font-size:12.5px;
+    padding:26px 0 60px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
     color:var(--muted);
+    border-top:1px solid var(--line);
+    margin-top:20px;
   }
 
-  ::selection{background:var(--teal);color:var(--paper);}
+  ::selection{background:var(--amber);color:var(--bg);}
 </style>
 </head>
 <body>
 
-<nav class="rail" aria-label="Πλοήγηση ενοτήτων">
-  <svg width="24" height="560" viewBox="0 0 24 560">
-    <line x1="12" y1="10" x2="12" y2="550" stroke="var(--line)" stroke-width="2"/>
-  </svg>
-</nav>
-
-<main>
 <div class="wrap">
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-grid">
+  <!-- ============ HUB / INDEX ============ -->
+  <section class="view active" id="view-hub">
+
+    <div class="titleblock">
       <div>
-        <div class="eyebrow">Θεσσαλονίκη, Ελλάδα</div>
-        <h1>Γιώργος Πίτσος</h1>
-        <p class="hero-role">Χημικός Μηχανικός (MEng) με έμφαση στον σχεδιασμό διεργασιών, τη μοντελοποίηση κινδύνου/ασφάλειας και τη διαχείριση έργων — από τη διπλωματική εργασία μέχρι το εργοτάξιο.</p>
-        <div class="hero-meta">
-          <span>Aristotle University of Thessaloniki</span>
-          <span>·</span>
-          <span>Ολοκλήρωση 2026</span>
-          <span>·</span>
-          <span>Ελληνικά (μητρική) · Αγγλικά (άπταιστα)</span>
-        </div>
-        <div class="hero-links">
+        <h1>Georgios Pitsos</h1>
+        <p class="role">Chemical Engineer (MEng) focused on process design, risk/safety modeling, and project management.</p>
+        <div class="links-row">
           <a href="mailto:pitsosgeorgios@yahoo.com">pitsosgeorgios@yahoo.com</a>
           <a href="https://www.linkedin.com/in/georgios-pitsos/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
-      <div>
-        <svg class="flow" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path class="flow-line" d="M20,40 L100,40 L100,90"/>
-          <path class="flow-line" d="M100,90 L100,140 L180,140"/>
-          <path class="flow-line" d="M180,140 L260,140"/>
-          <path class="flow-line" d="M100,90 L20,90 L20,170"/>
-          <rect class="flow-node" x="0" y="20" width="40" height="40" rx="2"/>
-          <text class="flow-text" x="8" y="44">MSc</text>
-          <circle class="flow-node" cx="100" cy="90" r="20"/>
-          <text class="flow-text" x="86" y="94">PM</text>
-          <rect class="flow-node amber" x="160" y="120" width="40" height="40" rx="2"/>
-          <text class="flow-text" x="167" y="144">HSE</text>
-          <circle class="flow-node" cx="20" cy="170" r="18"/>
-          <text class="flow-text" x="8" y="174">Ops</text>
-          <circle class="flow-node" cx="260" cy="140" r="16"/>
-          <text class="flow-text" x="248" y="144">EQ</text>
-        </svg>
+      <div class="meta-grid">
+        <span class="k">BASED IN</span><span>Thessaloniki, GR</span>
+        <span class="k">UNIVERSITY</span><span>Aristotle Univ. of Thessaloniki</span>
+        <span class="k">REV.</span><span>2026</span>
       </div>
+    </div>
+
+    <div class="network-wrap">
+      <svg viewBox="0 0 980 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of sections connected to Georgios Pitsos">
+        <!-- connecting lines -->
+        <g class="net-link">
+          <line x1="490" y1="350" x2="490" y2="120"/>
+          <line x1="490" y1="350" x2="716" y2="187"/>
+          <line x1="490" y1="350" x2="810" y2="350"/>
+          <line x1="490" y1="350" x2="716" y2="513"/>
+          <line x1="490" y1="350" x2="490" y2="580"/>
+          <line x1="490" y1="350" x2="264" y2="513"/>
+          <line x1="490" y1="350" x2="170" y2="350"/>
+          <line x1="490" y1="350" x2="264" y2="187"/>
+        </g>
+        <!-- junction marks -->
+        <g class="net-junction">
+          <rect x="486" y="231" width="8" height="8" transform="rotate(45 490 235)"/>
+          <rect x="599" y="264" width="8" height="8" transform="rotate(45 603 268)"/>
+          <rect x="646" y="346" width="8" height="8" transform="rotate(45 650 350)"/>
+          <rect x="599" y="428" width="8" height="8" transform="rotate(45 603 432)"/>
+          <rect x="486" y="461" width="8" height="8" transform="rotate(45 490 465)"/>
+          <rect x="373" y="428" width="8" height="8" transform="rotate(45 377 432)"/>
+          <rect x="326" y="346" width="8" height="8" transform="rotate(45 330 350)"/>
+          <rect x="373" y="264" width="8" height="8" transform="rotate(45 377 268)"/>
+        </g>
+
+        <!-- satellite nodes -->
+        <a class="node" href="#about"><title>About</title>
+          <circle class="node-circle" cx="490" cy="120" r="64"/>
+          <text class="node-title" x="490" y="125">About</text>
+        </a>
+        <a class="node" href="#experience"><title>Experience</title>
+          <circle class="node-circle" cx="716" cy="187" r="64"/>
+          <text class="node-title" x="716" y="192">Experience</text>
+        </a>
+        <a class="node" href="#work"><title>Thesis &amp; Capstone</title>
+          <circle class="node-circle" cx="810" cy="350" r="64"/>
+          <text class="node-title" x="810" y="355">Thesis</text>
+        </a>
+        <a class="node" href="#skills"><title>Skills &amp; Technologies</title>
+          <circle class="node-circle" cx="716" cy="513" r="64"/>
+          <text class="node-title" x="716" y="518">Skills</text>
+        </a>
+        <a class="node" href="#training"><title>Training &amp; Certifications</title>
+          <circle class="node-circle" cx="490" cy="580" r="64"/>
+          <text class="node-title" x="490" y="585">Certifications</text>
+        </a>
+        <a class="node" href="#beyond"><title>Beyond Engineering</title>
+          <circle class="node-circle" cx="264" cy="513" r="64"/>
+          <text class="node-title" x="264" y="518">Beyond</text>
+        </a>
+        <a class="node" href="#education"><title>Education</title>
+          <circle class="node-circle" cx="170" cy="350" r="64"/>
+          <text class="node-title" x="170" y="355">Education</text>
+        </a>
+        <a class="node" href="#contact"><title>Contact</title>
+          <circle class="node-circle" cx="264" cy="187" r="64"/>
+          <text class="node-title" x="264" y="192">Contact</text>
+        </a>
+
+        <!-- center node -->
+        <g class="center-node">
+          <circle class="center-circle" cx="490" cy="350" r="86"/>
+          <text class="center-name" x="490" y="345">GEORGIOS</text>
+          <text class="center-name" x="490" y="368">PITSOS</text>
+        </g>
+      </svg>
+    </div>
+
+    <footer>© <span id="year"></span> Georgios Pitsos — Sheet 00 / Index</footer>
+  </section>
+
+  <!-- ============ SH.01 ABOUT ============ -->
+  <section class="view" id="view-about" data-order="0">
+    <div class="view-head">
+      <div><div class="sheet-no">SH.01</div><h2>About</h2></div>
+      <a class="back-link" href="#hub">← Index</a>
+    </div>
+    <div class="view-body">
+      <p style="max-width:66ch;text-align:justify;">I'm a Chemical Engineer graduating from the Aristotle University of Thessaloniki in April 2026, focused on process safety, evacuation modeling, and sustainable energy — from a thesis on hazard-aware evacuation simulation to a techno-economic feasibility study on bioethanol production.</p>
+      <p style="max-width:66ch;text-align:justify;">Professionally, I've worked as a Project Implementation Manager at Atlantis Engineering, rolling out a maintenance-management platform across 30+ clients. I also bring years of experience as a certified sports official (swimming, track and field) and lifeguard, which have sharpened my ability to stay calm and decisive under pressure. I enjoy combining technical modeling with hands-on project delivery.</p>
+      <div class="sheet-nav"><span></span><a href="#experience">SH.02 Experience →</a></div>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="eyebrow">Προφίλ</div>
-    <h2 style="margin-bottom:22px;">Λίγα λόγια</h2>
-    <div class="about-cols">
-      <div>
-        <p>Ολοκληρώνω το Integrated Master's στη Χημική Μηχανική στο Αριστοτέλειο Πανεπιστήμιο Θεσσαλονίκης, με τη διπλωματική μου εργασία εστιασμένη στη μοντελοποίηση εκκένωσης χώρων υπό συνθήκες έκθεσης σε τοξικό φορτίο — ένα θέμα που συνδυάζει process safety, αλγοριθμική σκέψη και σχεδιασμό υποδομών.</p>
-        <p>Παράλληλα με τις σπουδές, δούλεψα ως Project Manager σε λογισμικό συντήρησης (AIMMS) στην Atlantis Engineering, όπου συντόνιζα χρονοδιαγράμματα, πόρους και επικοινωνία μεταξύ μηχανικών, ομάδων ανάπτυξης και πελατών. Η θητεία μου ως Δόκιμος Αξιωματικός στη Στρατιωτική Σχολή Ευελπίδων μού έδωσε πειθαρχία σε λήψη αποφάσεων υπό πίεση — κάτι που εφαρμόζω και εκτός εργασίας, ως επίσημος κριτής σε αγωνίσματα κολύμβησης και στίβου, και ως ναυαγοσώστης.</p>
+  <!-- ============ SH.02 EXPERIENCE ============ -->
+  <section class="view" id="view-experience" data-order="1">
+    <div class="view-head">
+      <div><div class="sheet-no">SH.02</div><h2>Experience</h2></div>
+      <a class="back-link" href="#hub">← Index</a>
+    </div>
+    <div class="view-body">
+      <div class="role">
+        <div class="role-date">2023 – 2024</div>
+        <div>
+          <h4>Project Implementation Manager</h4>
+          <div class="org">Atlantis Engineering S.A.</div>
+          <ul>
+            <li>Rolled out and managed a maintenance-management software platform (AIMMS) across 30+ clients, aligning resources, budgets, and timelines throughout the full project lifecycle.</li>
+            <li>Acted as the bridge between internal teams (engineering, development) and external clients, proactively resolving issues and ensuring clear communication.</li>
+          </ul>
+        </div>
       </div>
-      <div class="fact-list">
-        <div><span class="k">Πτυχίο</span>MEng Χημικός Μηχανικός, ΑΠΘ</div>
-        <div><span class="k">Εστίαση</span>Process Design · Ασφάλεια/Risk · Project Management</div>
-        <div><span class="k">Coding</span>Julia, Python, MATLAB</div>
-        <div><span class="k">Γλώσσες εργασίας</span>Ελληνικά, Αγγλικά</div>
-        <div><span class="k">Έδρα</span>Θεσσαλονίκη</div>
+      <div class="role">
+        <div class="role-date">2017 – 2018</div>
+        <div>
+          <h4>Officer Cadet, Ground Forces</h4>
+          <div class="org">Hellenic Military Academy</div>
+          <ul>
+            <li>Completed intensive training in military science, leadership, engineering, and humanitarian studies.</li>
+            <li>Developed decision-making skills and ethical judgment within a values-driven environment.</li>
+          </ul>
+        </div>
       </div>
+      <div class="role">
+        <div class="role-date">2022</div>
+        <div>
+          <h4>Structural Engineer</h4>
+          <div class="org">SpaceDot</div>
+        </div>
+      </div>
+      <div class="sheet-nav"><a href="#about">← SH.01 About</a><a href="#work">SH.03 Thesis &amp; Capstone →</a></div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">Επαγγελματική Πορεία</div>
-        <h2>Εμπειρία</h2>
-      </div>
+  <!-- ============ SH.03 WORK ============ -->
+  <section class="view" id="view-work" data-order="2">
+    <div class="view-head">
+      <div><div class="sheet-no">SH.03</div><h2>Thesis &amp; Capstone</h2></div>
+      <a class="back-link" href="#hub">← Index</a>
     </div>
-
-    <div class="role">
-      <div class="role-date">2023 – 2024</div>
-      <div>
-        <h3>Project Manager on AIMMS</h3>
-        <div class="org">Atlantis Engineering S.A.</div>
-        <ul>
-          <li>Σχεδίαση, προγραμματισμός και διαχείριση ολόκληρου του κύκλου ζωής έργων λογισμικού συντήρησης, με ευθυγράμμιση πόρων, προϋπολογισμού και χρονοδιαγραμμάτων.</li>
-          <li>Γέφυρα επικοινωνίας μεταξύ εσωτερικών ομάδων (engineering, development) και εξωτερικών πελατών, με προληπτική διαχείριση ζητημάτων.</li>
-        </ul>
+    <div class="view-body">
+      <div class="case">
+        <div class="tag">THESIS</div>
+        <h4>Extension of Evacuation Models with Dynamic Pathfinding based on Toxic Load Exposure</h4>
+        <p>Extending existing evacuation models with dynamic pathfinding algorithms that account for exposure to toxic load during the dispersion of hazardous substances.</p>
+        <div class="courses">Related course: Calculation of Effects from Fires, Explosions and Toxic Dispersion</div>
       </div>
-    </div>
-
-    <div class="role">
-      <div class="role-date">2017 – 2018</div>
-      <div>
-        <h3>Officer Cadet, Ground Forces</h3>
-        <div class="org">Hellenic Military Academy</div>
-        <ul>
-          <li>Εντατική εκπαίδευση σε στρατιωτική επιστήμη, ηγεσία, μηχανική και ανθρωπιστικά θέματα.</li>
-          <li>Ανάπτυξη δεξιοτήτων λήψης αποφάσεων και ηθικής κρίσης μέσα από ένα περιβάλλον προσανατολισμένο σε αξίες.</li>
-        </ul>
+      <div class="case">
+        <div class="tag">CAPSTONE DESIGN PROJECT</div>
+        <h4>Techno-Economic Analysis for the Production of Bioethanol from Concentrated Glucose</h4>
+        <p>A techno-economic analysis of a bioethanol production process from concentrated glucose, using process design and optimization tools.</p>
+        <div class="courses">Related courses: Advanced Methods for Process Design, Synthesis and Optimization · 3D CAD &amp; Optimization</div>
       </div>
-    </div>
-
-    <div class="role">
-      <div class="role-date">2022</div>
-      <div>
-        <h3>Structural Engineer</h3>
-        <div class="org">SpaceDot</div>
-      </div>
+      <div class="sheet-nav"><a href="#experience">← SH.02 Experience</a><a href="#skills">SH.04 Skills &amp; Technologies →</a></div>
     </div>
   </section>
 
-  <!-- FEATURED WORK -->
-  <section id="work">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">Ακαδημαϊκή Δουλειά</div>
-        <h2>Διπλωματική &amp; Capstone</h2>
+  <!-- ============ SH.04 SKILLS ============ -->
+  <section class="view" id="view-skills" data-order="3">
+    <div class="view-head">
+      <div><div class="sheet-no">SH.04</div><h2>Skills &amp; Technologies</h2></div>
+      <a class="back-link" href="#hub">← Index</a>
+    </div>
+    <div class="view-body">
+      <div class="skill-grid">
+        <div class="skill-cell"><h4>CODING</h4><div class="items">Julia, Python, MATLAB</div></div>
+        <div class="skill-cell"><h4>OPTIMIZATION</h4><div class="items">GAMS</div></div>
+        <div class="skill-cell"><h4>SIMULATION</h4><div class="items">SolidWorks, ANSA</div></div>
+        <div class="skill-cell"><h4>PROCESS DESIGN</h4><div class="items">UniSim</div></div>
+        <div class="skill-cell"><h4>VIDEO EDITING</h4><div class="items">DaVinci Resolve</div></div>
+        <div class="skill-cell"><h4>SOFT SKILLS</h4><div class="items">Project Management, Leadership, Critical Thinking, Adaptability</div></div>
       </div>
-    </div>
-
-    <div class="case">
-      <div class="tag">Διπλωματική Εργασία</div>
-      <h3>Extension of Evacuation Models with Dynamic Pathfinding based on Toxic Load Exposure</h3>
-      <p>Επέκταση υπαρχόντων μοντέλων εκκένωσης χώρων με αλγορίθμους δυναμικής εύρεσης διαδρομής, λαμβάνοντας υπόψη την έκθεση σε τοξικό φορτίο κατά τη διάρκεια διασποράς επικίνδυνων ουσιών — στο σταυροδρόμι process safety και computational modeling.</p>
-      <div class="courses">Σχετικά μαθήματα: Υπολογισμός Επιπτώσεων από Πυρκαγιές, Εκρήξεις και Τοξική Διασπορά</div>
-    </div>
-
-    <div class="case">
-      <div class="tag">Capstone Design Project</div>
-      <h3>Techno-Economic Analysis for the Production of Bioethanol from Concentrated Glucose</h3>
-      <p>Τεχνοοικονομική ανάλυση διεργασίας παραγωγής βιοαιθανόλης από συμπυκνωμένη γλυκόζη, με χρήση εργαλείων process design και optimization.</p>
-      <div class="courses">Σχετικά μαθήματα: Προηγμένες Μέθοδοι Σχεδιασμού, Σύνθεσης και Βελτιστοποίησης Διεργασιών · 3D CAD &amp; Optimization</div>
+      <div class="sheet-nav"><a href="#work">← SH.03 Thesis &amp; Capstone</a><a href="#training">SH.05 Training &amp; Certifications →</a></div>
     </div>
   </section>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">Εργαλεία</div>
-        <h2>Skills &amp; Technologies</h2>
+  <!-- ============ SH.05 TRAINING ============ -->
+  <section class="view" id="view-training" data-order="4">
+    <div class="view-head">
+      <div><div class="sheet-no">SH.05</div><h2>Training &amp; Certifications</h2></div>
+      <a class="back-link" href="#hub">← Index</a>
+    </div>
+    <div class="view-body">
+      <div class="cert-grid">
+        <div class="cert"><div class="title">3rd Hydrogen Summer School (ScH2ool)</div><div class="sub">Specialized training in hydrogen technologies</div></div>
+        <div class="cert"><div class="title">EnergyX: Sustainable Energy — Design a Renewable Future</div><div class="sub">DelftX</div></div>
+        <div class="cert"><div class="title">Bioprinting Ignited x Greece</div><div class="sub">CELLINK</div></div>
+        <div class="cert"><div class="title">Natural, Biological and Anthropogenic Disasters &amp; Infrastructure Projects</div><div class="sub">Specialized training</div></div>
+        <div class="cert"><div class="title">White Tower Forum 2022</div><div class="sub">Attendance</div></div>
+        <div class="cert"><div class="title">BADGE Conference, Wernigerode 2022</div><div class="sub">Attendance</div></div>
+        <div class="cert"><div class="title">INCLUDE</div><div class="sub">Program completion</div></div>
+        <div class="cert"><div class="title">UNICERT</div><div class="sub">Program completion</div></div>
+        <div class="cert"><div class="title">Modern Tools for Work, Collaboration, and Remote Work</div><div class="sub">Attendance</div></div>
+        <div class="cert"><div class="title">Internship</div><div class="sub">Completed</div></div>
       </div>
-    </div>
-    <div class="skill-grid">
-      <div class="skill-cell"><h4>Coding</h4><div class="items">Julia, Python, MATLAB</div></div>
-      <div class="skill-cell"><h4>Optimization</h4><div class="items">GAMS</div></div>
-      <div class="skill-cell"><h4>Simulation</h4><div class="items">SolidWorks, ANSA</div></div>
-      <div class="skill-cell"><h4>Process Design</h4><div class="items">UniSim</div></div>
-      <div class="skill-cell"><h4>Video Editing</h4><div class="items">DaVinci Resolve</div></div>
-      <div class="skill-cell"><h4>Πρακτικές Δεξιότητες</h4><div class="items">Project Management, Ηγεσία, Κριτική Σκέψη, Προσαρμοστικότητα</div></div>
-    </div>
-  </section>
-
-  <!-- TRAINING -->
-  <section id="training">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">Δια Βίου Μάθηση</div>
-        <h2>Σεμινάρια &amp; Πιστοποιήσεις</h2>
-      </div>
-      <div class="count">επιλεγμένα</div>
-    </div>
-    <div class="cert-grid">
-      <div class="cert"><div class="title">3rd Hydrogen Summer School (ScH2ool)</div><div class="sub">Εξειδικευμένη εκπαίδευση σε τεχνολογίες υδρογόνου</div></div>
-      <div class="cert"><div class="title">EnergyX: Sustainable Energy — Design a Renewable Future</div><div class="sub">DelftX</div></div>
-      <div class="cert"><div class="title">Bioprinting Ignited x Greece</div><div class="sub">CELLINK</div></div>
-      <div class="cert"><div class="title">Natural, Biological and Anthropogenic Disasters &amp; Infrastructure Projects</div><div class="sub">Εξειδικευμένη εκπαίδευση</div></div>
-      <div class="cert"><div class="title">White Tower Forum 2022</div><div class="sub">Παρακολούθηση</div></div>
-      <div class="cert"><div class="title">BADGE Conference, Wernigerode 2022</div><div class="sub">Παρακολούθηση</div></div>
-      <div class="cert"><div class="title">INCLUDE</div><div class="sub">Ολοκλήρωση προγράμματος</div></div>
-      <div class="cert"><div class="title">UNICERT</div><div class="sub">Ολοκλήρωση προγράμματος</div></div>
-      <div class="cert"><div class="title">Μοντέρνα Εργαλεία Εργασίας, Συνεργασίας και Τηλεργασίας</div><div class="sub">Παρακολούθηση</div></div>
-      <div class="cert"><div class="title">Πρακτική Άσκηση</div><div class="sub">Ολοκλήρωση</div></div>
+      <div class="sheet-nav"><a href="#skills">← SH.04 Skills &amp; Technologies</a><a href="#beyond">SH.06 Beyond Engineering →</a></div>
     </div>
   </section>
 
-  <!-- BEYOND -->
-  <section id="beyond">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">Πέρα από τη Μηχανική</div>
-        <h2>Ενεργός Ρόλος στην Κοινότητα</h2>
-      </div>
+  <!-- ============ SH.06 BEYOND ============ -->
+  <section class="view" id="view-beyond" data-order="5">
+    <div class="view-head">
+      <div><div class="sheet-no">SH.06</div><h2>Beyond Engineering</h2></div>
+      <a class="back-link" href="#hub">← Index</a>
     </div>
-    <div class="beyond-row">
-      <div class="beyond-item">
-        <h4>Κριτής Κολύμβησης &amp; Open Water Swimming</h4>
-        <div class="since">Από το 2023</div>
+    <div class="view-body">
+      <div class="beyond-row">
+        <div class="beyond-item"><h4>Swimming &amp; Open Water Swimming Official</h4><div class="since">SINCE 2023</div></div>
+        <div class="beyond-item"><h4>Track and Field Official</h4><div class="since">SINCE 2022</div></div>
+        <div class="beyond-item"><h4>Lifeguard</h4><div class="since">SINCE 2019</div></div>
+        <div class="beyond-item"><h4>Volunteer, Balkan Veterans Athletics Games</h4><div class="since">SEPT 2022</div></div>
       </div>
-      <div class="beyond-item">
-        <h4>Κριτής Στίβου</h4>
-        <div class="since">Από το 2022</div>
-      </div>
-      <div class="beyond-item">
-        <h4>Ναυαγοσώστης</h4>
-        <div class="since">Από το 2019</div>
-      </div>
-      <div class="beyond-item">
-        <h4>Εθελοντής, Βαλκανικοί Αγώνες Βετεράνων Στίβου</h4>
-        <div class="since">Σεπτέμβριος 2022</div>
-      </div>
+      <div class="sheet-nav"><a href="#training">← SH.05 Training &amp; Certifications</a><a href="#education">SH.07 Education →</a></div>
     </div>
   </section>
 
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">Εκπαίδευση</div>
-        <h2>Ακαδημαϊκό Υπόβαθρο</h2>
-      </div>
+  <!-- ============ SH.07 EDUCATION ============ -->
+  <section class="view" id="view-education" data-order="6">
+    <div class="view-head">
+      <div><div class="sheet-no">SH.07</div><h2>Education</h2></div>
+      <a class="back-link" href="#hub">← Index</a>
     </div>
-    <div class="role">
-      <div class="role-date">2018 – 2026</div>
-      <div>
-        <h3>Integrated Master's στη Χημική Μηχανική</h3>
-        <div class="org">Πολυτεχνική Σχολή, Αριστοτέλειο Πανεπιστήμιο Θεσσαλονίκης</div>
-        <ul>
-          <li>Βαθμός: 7.27/10 (πενταετές πρόγραμμα σπουδών)</li>
-          <li>Επιλεγμένα μαθήματα: Υπολογισμός Επιπτώσεων από Πυρκαγιές/Εκρήξεις/Τοξική Διασπορά, Υγιεινή &amp; Ασφάλεια στη Βιομηχανία, Προηγμένος Σχεδιασμός Διεργασιών</li>
-        </ul>
+    <div class="view-body">
+      <div class="role">
+        <div class="role-date">2018 – 2026</div>
+        <div>
+          <h4>Integrated Master's in Chemical Engineering</h4>
+          <div class="org">Faculty of Engineering, Aristotle University of Thessaloniki</div>
+          <ul>
+            <li>Grade: 7.27/10 (five-year integrated program)</li>
+            <li>Selected courses: Calculation of Effects from Fires, Explosions and Toxic Dispersion · Hygiene &amp; Safety in Industry · Advanced Process Design</li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="role">
-      <div class="role-date">2017</div>
-      <div>
-        <h3>Απολυτήριο Λυκείου</h3>
-        <div class="org">Ελληνικό Κολλέγιο Θεσσαλονίκης</div>
-        <ul>
-          <li>Βαθμός: 19.8/20.0 (Top 10%)</li>
-        </ul>
+      <div class="role">
+        <div class="role-date">2017</div>
+        <div>
+          <h4>High School Diploma</h4>
+          <div class="org">Hellenic College of Thessaloniki</div>
+          <ul><li>Grade: 19.8/20.0 (Top 10%)</li></ul>
+        </div>
       </div>
+      <div class="sheet-nav"><a href="#beyond">← SH.06 Beyond Engineering</a><a href="#contact">SH.08 Contact →</a></div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-grid">
-      <div>
-        <div class="eyebrow">Επικοινωνία</div>
-        <h2>Ας μιλήσουμε για μια ευκαιρία συνεργασίας.</h2>
-      </div>
+  <!-- ============ SH.08 CONTACT ============ -->
+  <section class="view" id="view-contact" data-order="7">
+    <div class="view-head">
+      <div><div class="sheet-no">SH.08</div><h2>Contact</h2></div>
+      <a class="back-link" href="#hub">← Index</a>
+    </div>
+    <div class="view-body">
       <div class="contact-list">
-        <div><span class="k">Email</span><a href="mailto:pitsosgeorgios@yahoo.com">pitsosgeorgios@yahoo.com</a></div>
-        <div><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/georgios-pitsos/" target="_blank" rel="noopener">linkedin.com/in/georgios-pitsos</a></div>
-        <div><span class="k">Τοποθεσία</span>Θεσσαλονίκη, Ελλάδα</div>
+        <div><span class="k">EMAIL</span><a href="mailto:pitsosgeorgios@yahoo.com">pitsosgeorgios@yahoo.com</a></div>
+        <div><span class="k">LINKEDIN</span><a href="https://www.linkedin.com/in/georgios-pitsos/" target="_blank" rel="noopener">georgios-pitsos</a></div>
+        <div><span class="k">LOCATION</span><span>Thessaloniki, Greece</span></div>
       </div>
+      <div class="sheet-nav"><a href="#education">← SH.07 Education</a><a href="#hub">Index →</a></div>
     </div>
   </section>
-
-  <footer>© <span id="year"></span> Γιώργος Πίτσος</footer>
 
 </div>
-</main>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Build the process rail dynamically from sections
-  const sections = [...document.querySelectorAll('main section')];
-  const railSvg = document.querySelector('.rail svg');
-  const railHeight = railSvg.getAttribute('height');
-  const top = 20, bottom = railHeight - 20;
-  const step = sections.length > 1 ? (bottom - top) / (sections.length - 1) : 0;
+  function showView(id){
+    var views = document.querySelectorAll('.view');
+    var target = document.getElementById('view-' + id);
+    if(!target){ target = document.getElementById('view-hub'); id = 'hub'; }
+    views.forEach(function(v){ v.classList.remove('active'); });
+    target.classList.add('active');
+    window.scrollTo(0,0);
+  }
 
-  sections.forEach((sec, i) => {
-    const y = top + step * i;
-    const ns = "http://www.w3.org/2000/svg";
-    const g = document.createElementNS(ns, "a");
-    g.setAttribute("href", "#" + sec.id);
-    g.classList.add("rail-item");
+  function currentId(){
+    var h = location.hash.replace('#','');
+    return h || 'hub';
+  }
 
-    const circle = document.createElementNS(ns, "circle");
-    circle.setAttribute("cx", 12);
-    circle.setAttribute("cy", y);
-    circle.setAttribute("r", 5);
-    circle.classList.add("rail-dot");
-    circle.dataset.target = sec.id;
-
-    const label = document.createElementNS(ns, "text");
-    label.setAttribute("x", 20);
-    label.setAttribute("y", y + 4);
-    label.classList.add("rail-label");
-    label.textContent = sec.querySelector('h1,h2')?.textContent.slice(0, 18) || sec.id;
-
-    g.appendChild(circle);
-    g.appendChild(label);
-    railSvg.appendChild(g);
-  });
-
-  const dots = [...document.querySelectorAll('.rail-dot')];
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const dot = dots.find(d => d.dataset.target === entry.target.id);
-      if (!dot) return;
-      if (entry.isIntersecting) {
-        dots.forEach(d => d.classList.remove('active'));
-        dot.classList.add('active');
-      }
-    });
-  }, { rootMargin: "-45% 0px -45% 0px" });
-
-  sections.forEach(sec => observer.observe(sec));
+  window.addEventListener('hashchange', function(){ showView(currentId()); });
+  document.addEventListener('DOMContentLoaded', function(){ showView(currentId()); });
 </script>
 
 </body>
