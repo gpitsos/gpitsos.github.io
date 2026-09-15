@@ -39,7 +39,7 @@
     background-attachment:scroll, scroll, scroll, scroll, scroll, fixed;
     color:var(--ink);
     font-family:'IBM Plex Serif', Georgia, serif;
-    font-size:17px;
+    font-size:19px;
     line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
@@ -73,17 +73,17 @@
     gap:16px;
     margin:40px 0 8px;
   }
-  .titleblock h1{font-size:clamp(26px,4vw,38px);font-weight:600;}
+  .titleblock h1{font-size:clamp(30px,4.6vw,44px);font-weight:600;}
   .titleblock .role{
     font-family:'IBM Plex Serif',serif;
     color:var(--muted);
-    font-size:15.5px;
+    font-size:18px;
     margin-top:10px;
     max-width:52ch;
   }
   .meta-grid{
     font-family:'IBM Plex Mono',monospace;
-    font-size:11.5px;
+    font-size:13.5px;
     color:var(--muted);
     display:grid;
     grid-template-columns:auto auto;
@@ -98,7 +98,7 @@
     .titleblock{grid-template-columns:1fr;}
     .meta-grid{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:12px;}
   }
-  .links-row{margin-top:16px;display:flex;gap:18px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:13.5px;}
+  .links-row{margin-top:16px;display:flex;gap:18px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:15.5px;}
 
   /* ---------- network diagram (hub) ---------- */
   .network-wrap{
@@ -117,7 +117,7 @@
   .node .node-title{
     font-family:'IBM Plex Mono',monospace;
     font-weight:600;
-    font-size:14.5px;
+    font-size:16.5px;
     fill:var(--ink);
     text-anchor:middle;
     transition:fill 0.15s ease;
@@ -130,7 +130,7 @@
     text-anchor:middle;
     fill:var(--ink);
   }
-  .center-node .center-name{font-size:19px;font-weight:700;}
+  .center-node .center-name{font-size:22px;font-weight:700;}
 
   /* ---------- detail view chrome ---------- */
   .view-head{
@@ -149,15 +149,15 @@
   }
   .back-link{
     font-family:'IBM Plex Mono',monospace;
-    font-size:13px;
+    font-size:15px;
     text-decoration:none;
     color:var(--muted);
     border:1px solid var(--line);
     padding:7px 12px;
   }
   .back-link:hover{color:var(--amber);border-color:var(--amber);}
-  .view-head .sheet-no{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber);}
-  .view-head h2{font-size:26px;margin-top:6px;}
+  .view-head .sheet-no{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--amber);}
+  .view-head h2{font-size:30px;margin-top:6px;}
 
   .view-body{
     padding:28px 24px 40px;
@@ -178,23 +178,28 @@
   }
   .role:last-child{border-bottom:none;}
   @media (max-width:600px){ .role{grid-template-columns:1fr;gap:6px;} }
-  .role-date{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted);padding-top:3px;}
-  .role h4{font-size:18px;font-family:'IBM Plex Mono',monospace;font-weight:600;}
-  .role .org{font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:var(--amber);margin-top:4px;}
+  .role-date{font-family:'IBM Plex Mono',monospace;font-size:14.5px;color:var(--muted);padding-top:3px;}
+  .role h4{font-size:21px;font-family:'IBM Plex Mono',monospace;font-weight:600;}
+  .role .org{font-family:'IBM Plex Mono',monospace;font-size:15.5px;color:var(--amber);margin-top:4px;}
   .role ul{margin:12px 0 0 0;padding-left:20px;}
   .role li{margin-bottom:6px;}
 
   /* ---------- case (thesis/capstone) ---------- */
   .case{
+    display:block;
     border:1px solid var(--line);
     background:var(--bg-2);
     padding:26px;
     margin-bottom:20px;
+    color:inherit;
+    text-decoration:none;
+    transition:border-color 0.15s ease, background 0.15s ease;
   }
-  .case .tag{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber);margin-bottom:10px;}
-  .case h4{font-size:18px;font-family:'IBM Plex Mono',monospace;font-weight:600;line-height:1.4;}
+  a.case:hover{border-color:var(--amber);background:var(--bg-3);}
+  .case .tag{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--amber);margin-bottom:10px;}
+  .case h4{font-size:21px;font-family:'IBM Plex Mono',monospace;font-weight:600;line-height:1.4;}
   .case p{margin:12px 0 0;max-width:70ch;}
-  .case .courses{margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted);}
+  .case .courses{margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:14.5px;color:var(--muted);}
 
   /* ---------- skills grid ---------- */
   .skill-grid{
@@ -204,24 +209,24 @@
     background:var(--line);
   }
   .skill-cell{background:var(--bg-2);padding:20px 22px;}
-  .skill-cell h4{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:8px;}
-  .skill-cell .items{font-family:'IBM Plex Serif',serif;font-size:15.5px;}
+  .skill-cell h4{font-family:'IBM Plex Mono',monospace;font-size:14.5px;color:var(--muted);font-weight:600;margin-bottom:8px;}
+  .skill-cell .items{font-family:'IBM Plex Serif',serif;font-size:18px;}
 
   /* ---------- cert grid ---------- */
   .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);}
   @media (max-width:600px){ .cert-grid{grid-template-columns:1fr;} }
   .cert{background:var(--bg-2);padding:18px 20px;}
-  .cert .title{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:14px;}
-  .cert .sub{font-family:'IBM Plex Serif',serif;font-size:13.5px;color:var(--muted);margin-top:4px;}
+  .cert .title{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:16.5px;}
+  .cert .sub{font-family:'IBM Plex Serif',serif;font-size:15.5px;color:var(--muted);margin-top:4px;}
 
   /* ---------- beyond row ---------- */
   .beyond-row{display:flex;gap:1px;background:var(--line);flex-wrap:wrap;}
   .beyond-item{flex:1 1 200px;background:var(--bg-2);padding:20px;}
-  .beyond-item h4{font-family:'IBM Plex Mono',monospace;font-size:14.5px;margin-bottom:6px;}
-  .beyond-item .since{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber);}
+  .beyond-item h4{font-family:'IBM Plex Mono',monospace;font-size:17px;margin-bottom:6px;}
+  .beyond-item .since{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--amber);}
 
   /* ---------- contact ---------- */
-  .contact-list{font-family:'IBM Plex Mono',monospace;font-size:14.5px;max-width:520px;}
+  .contact-list{font-family:'IBM Plex Mono',monospace;font-size:17px;max-width:520px;}
   .contact-list div{padding:14px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;}
   .contact-list .k{color:var(--muted);}
 
@@ -233,7 +238,7 @@
     padding-top:20px;
     margin-top:10px;
     font-family:'IBM Plex Mono',monospace;
-    font-size:13px;
+    font-size:15px;
   }
   .sheet-nav a{color:var(--muted);text-decoration:none;}
   .sheet-nav a:hover{color:var(--amber);}
@@ -241,7 +246,7 @@
   footer{
     padding:26px 0 60px;
     font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
+    font-size:14px;
     color:var(--muted);
     border-top:1px solid var(--line);
     margin-top:20px;
@@ -335,8 +340,10 @@
       <a class="back-link" href="#hub">← Index</a>
     </div>
     <div class="view-body">
-      <p style="max-width:66ch;text-align:justify;">I'm a Chemical Engineer graduating from the Aristotle University of Thessaloniki in April 2026, focused on process safety, evacuation modeling, and sustainable energy — from a thesis on hazard-aware evacuation simulation to a techno-economic feasibility study on bioethanol production.</p>
-      <p style="max-width:66ch;text-align:justify;">Professionally, I've worked as a Project Implementation Manager at Atlantis Engineering, rolling out a maintenance-management platform across 30+ clients. I also bring years of experience as a certified sports official (swimming, track and field) and lifeguard, which have sharpened my ability to stay calm and decisive under pressure. I enjoy combining technical modeling with hands-on project delivery.</p>
+      <p style="max-width:66ch;text-align:justify;">I'm a Chemical Engineer graduating from the Aristotle University of Thessaloniki in April 2026, with a growing focus on process safety and energy systems. My research centers on evacuation and risk modeling — my thesis extended agent-based evacuation simulations with dynamic, hazard-aware pathfinding (Julia, A*/D*lite), while my capstone project modeled the techno-economic feasibility of a second-generation bioethanol production facility. As part of a 6-person team, I helped model the full process chain in UniSim, compare two dehydration technologies, and build a full feasibility study covering capital investment, production cost, and cash-flow analysis, ultimately identifying a route with an estimated NPV of approximately €293.8M and a 3.3-year payback period. I'm equally drawn to sustainable energy, having completed specialized training in hydrogen energy systems and renewable energy design.</p>
+      <p style="max-width:66ch;text-align:justify;">On the professional side, I've worked as a Project Implementation Manager at Atlantis Engineering, rolling out a CMMS/CAFM maintenance-management platform across roughly 30 client accounts, coordinating budgets, timelines, and cross-functional teams from planning through go-live.</p>
+      <p style="max-width:66ch;text-align:justify;">I also bring several years of experience officiating competitive sport: I serve as a certified official for swimming and open water swimming, and for track and field, enforcing competition rules and ensuring athlete safety at events. Alongside this, I've worked as a certified lifeguard since 2019, a role that has sharpened my ability to stay calm, attentive, and decisive under pressure — qualities I carry directly into technical and project work.</p>
+      <p style="max-width:66ch;text-align:justify;">I enjoy working at the intersection of technical modeling and project delivery: using tools like Python, Julia, MATLAB, UniSim, and GAMS to solve problems, and translating that technical work into outcomes that stakeholders can act on.</p>
       <div class="sheet-nav"><span></span><a href="#experience">SH.02 Experience →</a></div>
     </div>
   </section>
@@ -388,16 +395,16 @@
       <a class="back-link" href="#hub">← Index</a>
     </div>
     <div class="view-body">
-      <div class="case">
-        <div class="tag">THESIS</div>
+      <a class="case" href="https://ikee.lib.auth.gr/record/375705/?ln=en" target="_blank" rel="noopener">
+        <div class="tag">THESIS — click to view at AUTh Library (IKEE)</div>
         <h4>Extension of Evacuation Models with Dynamic Pathfinding based on Toxic Load Exposure</h4>
-        <p>Extending existing evacuation models with dynamic pathfinding algorithms that account for exposure to toxic load during the dispersion of hazardous substances.</p>
-        <div class="courses">Related course: Calculation of Effects from Fires, Explosions and Toxic Dispersion</div>
-      </div>
+        <p>This thesis investigates the extension of evacuation modelling for industrial environments affected by toxic hydrogen sulfide (H₂S) releases, focusing on dynamic routing based on predicted human exposure (Toxic Load, TL). Using a Qatargas facility in Ras Laffan as the case study, the framework — implemented in Julia with Agent-Based Modelling — evaluates four pathfinding scenarios of increasing complexity: static A*, A* with static dispersion, A* with dynamic rerouting, and D*lite with dynamic rerouting, each tested across 100 simulations. Dynamic rerouting substantially improved evacuation safety, with the dynamic A* scenario achieving the lowest average toxic load exposure per agent, while additional analysis showed that muster-point placement strongly affects both safety and performance.</p>
+        <div class="courses">Keywords: Evacuation Modelling · Dynamic Pathfinding · Agent-Based Modelling (ABM) · Hydrogen Sulfide (H2S) · Toxic Load (TL) · A* &amp; D*lite Algorithms · Industrial Safety · Emergency Muster Point Optimization</div>
+      </a>
       <div class="case">
         <div class="tag">CAPSTONE DESIGN PROJECT</div>
         <h4>Techno-Economic Analysis for the Production of Bioethanol from Concentrated Glucose</h4>
-        <p>A techno-economic analysis of a bioethanol production process from concentrated glucose, using process design and optimization tools.</p>
+        <p>A techno-economic study, completed as part of a 6-person team, for producing 2nd-generation bioethanol from concentrated glucose (lignocellulosic biomass as feedstock), comparing two dehydration methods — Pressure Swing Adsorption (PSA) and Heterogeneous Azeotropic Distillation (HAD) — for a plant with an annual capacity of 200,000,000 L/year in Greece. Mass and energy balances, heat integration, and equipment design were carried out in UniSim, MATLAB, and HINT, while economic analysis (capital investment, operating costs, viability indexes) was performed in MS Excel, alongside a HAZOP safety study and a GAMS/AutoCAD-optimized plant layout. The PSA route was found more advantageous, with an estimated NPV of approximately €293.8M and a payback period of about 3.3 years.</p>
         <div class="courses">Related courses: Advanced Methods for Process Design, Synthesis and Optimization · 3D CAD &amp; Optimization</div>
       </div>
       <div class="sheet-nav"><a href="#experience">← SH.02 Experience</a><a href="#skills">SH.04 Skills &amp; Technologies →</a></div>
@@ -502,6 +509,7 @@
     <div class="view-body">
       <div class="contact-list">
         <div><span class="k">EMAIL</span><a href="mailto:pitsosgeorgios@yahoo.com">pitsosgeorgios@yahoo.com</a></div>
+        <div><span class="k">PHONE</span><a href="tel:+306986977087">+30 698 697 7087</a></div>
         <div><span class="k">LINKEDIN</span><a href="https://www.linkedin.com/in/georgios-pitsos/" target="_blank" rel="noopener">georgios-pitsos</a></div>
         <div><span class="k">LOCATION</span><span>Thessaloniki, Greece</span></div>
       </div>
