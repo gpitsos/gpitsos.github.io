@@ -216,6 +216,9 @@
   .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);}
   @media (max-width:600px){ .cert-grid{grid-template-columns:1fr;} }
   .cert{background:var(--bg-2);padding:18px 20px;}
+  a.cert{display:block;color:inherit;text-decoration:none;transition:background 0.15s ease;}
+  a.cert:hover{background:var(--bg-3);}
+  a.cert .title{color:var(--amber);}
   .cert .title{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:16.5px;}
   .cert .sub{font-family:'IBM Plex Serif',serif;font-size:15.5px;color:var(--muted);margin-top:4px;}
 
@@ -306,7 +309,7 @@
         </a>
         <a class="node" href="#training"><title>Training &amp; Certifications</title>
           <circle class="node-circle" cx="490" cy="580" r="64"/>
-          <text class="node-title" x="490" y="585">Certifications</text>
+          <text class="node-title" x="490" y="585">Certificates</text>
         </a>
         <a class="node" href="#beyond"><title>Beyond Engineering</title>
           <circle class="node-circle" cx="264" cy="513" r="64"/>
@@ -370,6 +373,13 @@
         </div>
       </div>
       <div class="role">
+        <div class="role-date">2022</div>
+        <div>
+          <h4>Structural Engineer</h4>
+          <div class="org">SpaceDot</div>
+        </div>
+      </div>
+      <div class="role">
         <div class="role-date">2017 – 2018</div>
         <div>
           <h4>Officer Cadet, Ground Forces</h4>
@@ -378,13 +388,6 @@
             <li>Completed intensive training in military science, leadership, engineering, and humanitarian studies.</li>
             <li>Developed decision-making skills and ethical judgment within a values-driven environment.</li>
           </ul>
-        </div>
-      </div>
-      <div class="role">
-        <div class="role-date">2022</div>
-        <div>
-          <h4>Structural Engineer</h4>
-          <div class="org">SpaceDot</div>
         </div>
       </div>
       <div class="sheet-nav"><a href="#about">← SH.01 About</a><a href="#work">SH.03 Thesis &amp; Capstone →</a></div>
@@ -441,16 +444,15 @@
     </div>
     <div class="view-body">
       <div class="cert-grid">
-        <div class="cert"><div class="title">3rd Hydrogen Summer School (ScH2ool)</div><div class="sub">Specialized training in hydrogen technologies</div></div>
-        <div class="cert"><div class="title">EnergyX: Sustainable Energy — Design a Renewable Future</div><div class="sub">DelftX</div></div>
-        <div class="cert"><div class="title">Bioprinting Ignited x Greece</div><div class="sub">CELLINK</div></div>
-        <div class="cert"><div class="title">Natural, Biological and Anthropogenic Disasters &amp; Infrastructure Projects</div><div class="sub">Specialized training</div></div>
-        <div class="cert"><div class="title">White Tower Forum 2022</div><div class="sub">Attendance</div></div>
-        <div class="cert"><div class="title">BADGE Conference, Wernigerode 2022</div><div class="sub">Attendance</div></div>
-        <div class="cert"><div class="title">INCLUDE</div><div class="sub">Program completion</div></div>
-        <div class="cert"><div class="title">UNICERT</div><div class="sub">Program completion</div></div>
-        <div class="cert"><div class="title">Modern Tools for Work, Collaboration, and Remote Work</div><div class="sub">Attendance</div></div>
-        <div class="cert"><div class="title">Internship</div><div class="sub">Completed</div></div>
+        <a class="cert" href="https://greenskillsforhydrogen.eu/3rd-hydrogen-summer-sch2ool-organised-in-western-macedonia/" target="_blank" rel="noopener"><div class="title">3rd Hydrogen Summer School (ScH2ool)</div><div class="sub">Specialized training in hydrogen technologies · 2025</div></a>
+        <a class="cert" href="https://sst.eap.gr/ndss/" target="_blank" rel="noopener"><div class="title">Natural, Biological and Anthropogenic Disasters &amp; Infrastructure Projects</div><div class="sub">Specialized training · 2025</div></a>
+        <a class="cert" href="https://www.cellink.com/bioprinting-ignited-x-greece/" target="_blank" rel="noopener"><div class="title">Bioprinting Ignited x Greece</div><div class="sub">CELLINK · 2024</div></a>
+        <a class="cert" href="https://ocw.tudelft.nl/courses/sustainable-energy-design-renewable-future/" target="_blank" rel="noopener"><div class="title">EnergyX: Sustainable Energy — Design a Renewable Future</div><div class="sub">DelftX · 2023</div></a>
+        <div class="cert"><div class="title">Modern Tools for Work, Collaboration, and Remote Work</div><div class="sub">Certificate of Attendance · 2022</div></div>
+        <div class="cert"><div class="title">BADGE Conference, Wernigerode</div><div class="sub">Certificate of Attendance · 2022</div></div>
+        <a class="cert" href="https://www.enve-lab.eu/index.php/συνεδριο-29-06-2022-30-06-2022/" target="_blank" rel="noopener"><div class="title">White Tower Forum</div><div class="sub">Certificate of Attendance · 2022</div></a>
+        <div class="cert"><div class="title">BADGE (Becoming a Digital Global Engineer)</div><div class="sub">Certificate of Completion · 2022</div></div>
+        <div class="cert"><div class="title">INCLUDE</div><div class="sub">Certificate of Completion · 2021</div></div>
       </div>
       <div class="sheet-nav"><a href="#skills">← SH.04 Skills &amp; Technologies</a><a href="#beyond">SH.06 Beyond Engineering →</a></div>
     </div>
@@ -464,10 +466,10 @@
     </div>
     <div class="view-body">
       <div class="beyond-row">
+        <div class="beyond-item"><h4>Unofficial Referee — Showdown</h4><div class="since">SINCE 2025</div></div>
         <div class="beyond-item"><h4>Swimming &amp; Open Water Swimming Official</h4><div class="since">SINCE 2023</div></div>
         <div class="beyond-item"><h4>Track and Field Official</h4><div class="since">SINCE 2022</div></div>
         <div class="beyond-item"><h4>Lifeguard</h4><div class="since">SINCE 2019</div></div>
-        <div class="beyond-item"><h4>Unofficial Referee — Showdown</h4><div class="since">SINCE 2025</div></div>
       </div>
       <div class="sheet-nav"><a href="#training">← SH.05 Training &amp; Certifications</a><a href="#education">SH.07 Education →</a></div>
     </div>
