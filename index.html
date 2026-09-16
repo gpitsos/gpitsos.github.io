@@ -205,17 +205,16 @@
   .skill-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-    gap:1px;
-    background:var(--line);
+    gap:10px;
   }
-  .skill-cell{background:var(--bg-2);padding:20px 22px;}
+  .skill-cell{background:var(--bg-2);border:1px solid var(--line);padding:20px 22px;}
   .skill-cell h4{font-family:'IBM Plex Mono',monospace;font-size:14.5px;color:var(--muted);font-weight:600;margin-bottom:8px;}
   .skill-cell .items{font-family:'IBM Plex Serif',serif;font-size:18px;}
 
   /* ---------- cert grid ---------- */
-  .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);}
+  .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
   @media (max-width:600px){ .cert-grid{grid-template-columns:1fr;} }
-  .cert{background:var(--bg-2);padding:18px 20px;}
+  .cert{background:var(--bg-2);border:1px solid var(--line);padding:18px 20px;}
   a.cert{display:block;color:inherit;text-decoration:none;transition:background 0.15s ease;}
   a.cert:hover{background:var(--bg-3);}
   a.cert .title{color:var(--amber);}
@@ -223,8 +222,8 @@
   .cert .sub{font-family:'IBM Plex Serif',serif;font-size:15.5px;color:var(--muted);margin-top:4px;}
 
   /* ---------- beyond row ---------- */
-  .beyond-row{display:flex;gap:1px;background:var(--line);flex-wrap:wrap;}
-  .beyond-item{flex:1 1 200px;background:var(--bg-2);padding:20px;}
+  .beyond-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .beyond-item{flex:1 1 200px;background:var(--bg-2);border:1px solid var(--line);padding:20px;}
   .beyond-item h4{font-family:'IBM Plex Mono',monospace;font-size:17px;margin-bottom:6px;}
   .beyond-item .since{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--amber);}
 
@@ -301,7 +300,10 @@
         </a>
         <a class="node" href="#work"><title>Thesis &amp; Capstone</title>
           <circle class="node-circle" cx="810" cy="350" r="64"/>
-          <text class="node-title" x="810" y="355">Thesis</text>
+          <text class="node-title" x="810" y="347">
+            <tspan x="810" dy="0">Thesis &amp;</tspan>
+            <tspan x="810" dy="20">Capstone</tspan>
+          </text>
         </a>
         <a class="node" href="#skills"><title>Skills &amp; Technologies</title>
           <circle class="node-circle" cx="716" cy="513" r="64"/>
