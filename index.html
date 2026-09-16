@@ -552,7 +552,8 @@
 
     if(subTarget){
       var el = document.getElementById(subTarget + '-role') || document.getElementById(subTarget + '-case');
-      if(el){
+      var firstEl = el ? el.closest('.view-body').querySelector('.role, .case') : null;
+      if(el && el !== firstEl){
         requestAnimationFrame(function(){
           var rect = el.getBoundingClientRect();
           var vh = window.innerHeight;
