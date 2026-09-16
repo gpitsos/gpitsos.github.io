@@ -363,7 +363,7 @@
       <a class="back-link" href="#hub">← Index</a>
     </div>
     <div class="view-body">
-      <div class="role">
+      <div class="role" id="atlantis-role">
         <div class="role-date">2023 – 2024</div>
         <div>
           <h4>Project Implementation Manager</h4>
@@ -374,7 +374,7 @@
           </ul>
         </div>
       </div>
-      <div class="role">
+      <div class="role" id="spacedot-role">
         <div class="role-date">2022</div>
         <div>
           <h4>Structural Engineer</h4>
@@ -386,7 +386,7 @@
           </ul>
         </div>
       </div>
-      <div class="role">
+      <div class="role" id="officer-role">
         <div class="role-date">2017 – 2018</div>
         <div>
           <h4>Officer Cadet, Ground Forces</h4>
@@ -434,12 +434,12 @@
     </div>
     <div class="view-body">
       <div class="skill-grid">
-        <div class="skill-cell"><h4>CODING</h4><div class="items"><a href="#work-thesis">Julia</a>, <a href="#education">Python</a>, <a href="#education">MATLAB</a></div></div>
-        <div class="skill-cell"><h4>OPTIMIZATION</h4><div class="items"><a href="#education">GAMS</a></div></div>
-        <div class="skill-cell"><h4>SIMULATION</h4><div class="items"><a href="#education">SolidWorks</a>, <a href="#experience">ANSA</a></div></div>
+        <div class="skill-cell"><h4>CODING</h4><div class="items"><a href="#work-thesis">Julia</a>, <a href="#education-masters">Python</a>, <a href="#education-masters">MATLAB</a></div></div>
+        <div class="skill-cell"><h4>OPTIMIZATION</h4><div class="items"><a href="#education-masters">GAMS</a></div></div>
+        <div class="skill-cell"><h4>SIMULATION</h4><div class="items"><a href="#education-masters">SolidWorks</a>, <a href="#experience-spacedot">ANSA</a></div></div>
         <div class="skill-cell"><h4>PROCESS DESIGN</h4><div class="items"><a href="#work-capstone">UniSim</a></div></div>
-        <div class="skill-cell"><h4>VIDEO EDITING</h4><div class="items"><a href="#experience">DaVinci Resolve</a></div></div>
-        <div class="skill-cell"><h4>SOFT SKILLS</h4><div class="items"><a href="#experience">Project Management</a>, <a href="#experience">Leadership</a></div></div>
+        <div class="skill-cell"><h4>VIDEO EDITING</h4><div class="items"><a href="#experience-atlantis">DaVinci Resolve</a></div></div>
+        <div class="skill-cell"><h4>SOFT SKILLS</h4><div class="items"><a href="#experience-atlantis">Project Management</a>, <a href="#experience-officer">Leadership</a></div></div>
       </div>
       <div class="sheet-nav"><a href="#work">← SH.03 Thesis &amp; Capstone</a><a href="#training">SH.05 Training &amp; Certifications →</a></div>
     </div>
@@ -491,7 +491,7 @@
       <a class="back-link" href="#hub">← Index</a>
     </div>
     <div class="view-body">
-      <div class="role">
+      <div class="role" id="masters-role">
         <div class="role-date">2018 – 2026</div>
         <div>
           <h4>Integrated Master's in Chemical Engineering</h4>
@@ -540,9 +540,10 @@
     var views = document.querySelectorAll('.view');
     var baseId = id;
     var subTarget = null;
-    if(id.indexOf('work-') === 0){
-      baseId = 'work';
-      subTarget = id.substring(5);
+    var dashIndex = id.indexOf('-');
+    if(dashIndex > 0){
+      baseId = id.substring(0, dashIndex);
+      subTarget = id.substring(dashIndex + 1);
     }
     var target = document.getElementById('view-' + baseId);
     if(!target){ target = document.getElementById('view-hub'); baseId = 'hub'; subTarget = null; }
@@ -550,12 +551,12 @@
     target.classList.add('active');
 
     if(subTarget){
-      var el = document.getElementById(subTarget + '-case');
+      var el = document.getElementById(subTarget + '-role') || document.getElementById(subTarget + '-case');
       if(el){
         requestAnimationFrame(function(){
           var rect = el.getBoundingClientRect();
           var vh = window.innerHeight;
-          var targetY = window.scrollY + rect.top - vh * 0.15;
+          var targetY = window.scrollY + rect.top - vh * 0.10;
           window.scrollTo({ top: Math.max(targetY, 0), behavior: 'auto' });
         });
         return;
