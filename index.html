@@ -408,7 +408,7 @@
       <a class="back-link" href="#hub">← Index</a>
     </div>
     <div class="view-body">
-      <a class="case" href="https://ikee.lib.auth.gr/record/375705/?ln=en" target="_blank" rel="noopener">
+      <a class="case" id="thesis-case" href="https://ikee.lib.auth.gr/record/375705/?ln=en" target="_blank" rel="noopener">
         <div class="tag">THESIS — click to view at AUTh Library (IKEE)</div>
         <h4>Extension of Evacuation Models with Dynamic Pathfinding based on Toxic Load Exposure</h4>
         <div class="courses">Keywords: Evacuation Modelling · Dynamic Pathfinding · Agent-Based Modelling (ABM) · Hydrogen Sulfide (H2S) · Toxic Load (TL) · A* &amp; D*lite Algorithms · Industrial Safety · Emergency Muster Point Optimization</div>
@@ -416,7 +416,7 @@
         <p style="margin-top:14px;">Results indicate a clear trade-off between computational cost and evacuation safety. Static scenarios (1 and 2) are computationally faster but lead to higher toxic exposure. Dynamic rerouting improves safety substantially, with Scenario 3 (modified A* with dynamic updates) achieving the lowest average TL per agent and the most favorable exposure distribution at higher TL levels. Scenario 4 (D*lite) shows higher total routing time and less favorable high-exposure behavior compared to Scenario 3 under the examined setup. Additional analysis of muster-point placement demonstrates that evacuation-point location strongly affects both safety and overall performance.</p>
         <p style="margin-top:14px;">Overall, the work shows that coupling dynamic routing with time-evolving hazard representation and exposure-aware metrics can significantly improve realism and effectiveness in evacuation modelling for toxic industrial incidents.</p>
       </a>
-      <div class="case">
+      <div class="case" id="capstone-case">
         <div class="tag">CAPSTONE DESIGN PROJECT</div>
         <h4>Techno-Economic Analysis for the Production of Bioethanol from Concentrated Glucose</h4>
         <p>This technical report constitutes a techno-economic study for the production of ethanol from concentrated glucose, with lignocellulosic biomass as first raw material, i.e. 2nd generation bioethanol. The whole process is studied under two methods of ethanol dehydration: Pressure Swing Adsorption (PSA) and Heterogeneous Azeotropic Distillation (HAD). The unit operates 350 days per year with annual capacity of 200,000,000 L/year and it is located in Greece. The main stages are dilution, condensation, fermentation, ethanol recovery and ethanol dehydration and also includes cooling towers and boilers. In the first part of the study, detailed mass and energy balances, heat integration and equipment design are done after optimization, with the help of the UniSim, MATLAB and HINT softwares. In the second part, operating costs and capital investment, as well as viability indexes are calculated through an economic analysis, using MS Excel. A total capital investment of 165,400,119 € (PSA) and 168,594,710 € (HAD) is required for meeting the financial needs of the unit with a lifetime of 30 years and 2 first years of construction. The payback period was calculated at approximately 3.26 years (PSA) and 4.58 years (HAD) after the construction and the NPV has been estimated at 293,771,809 € (PSA) and 172,427,277 € (HAD). All the other performance criteria have also positive values and as a result the plant was assumed to be feasible economically viable. Moreover, a sensitivity and a break-even analysis are carried out. In addition, the study is completed with the hazard and operability study, known as HAZOP and the plant layout by using the GAMS Software for the optimal places of the devices and AutoCAD for creating the layout. Finally, the two manufacturing methods are compared in terms of their efficiency and viability, resulted that the Pressure Swing Adsorption is more advantageous.</p>
@@ -434,12 +434,12 @@
     </div>
     <div class="view-body">
       <div class="skill-grid">
-        <div class="skill-cell"><h4>CODING</h4><div class="items">Julia, Python, MATLAB</div></div>
-        <div class="skill-cell"><h4>OPTIMIZATION</h4><div class="items">GAMS</div></div>
-        <div class="skill-cell"><h4>SIMULATION</h4><div class="items">SolidWorks, ANSA</div></div>
-        <div class="skill-cell"><h4>PROCESS DESIGN</h4><div class="items">UniSim</div></div>
-        <div class="skill-cell"><h4>VIDEO EDITING</h4><div class="items">DaVinci Resolve</div></div>
-        <div class="skill-cell"><h4>SOFT SKILLS</h4><div class="items">Project Management, Leadership, Critical Thinking, Adaptability</div></div>
+        <div class="skill-cell"><h4>CODING</h4><div class="items"><a href="#work-thesis">Julia</a>, <a href="#education">Python</a>, <a href="#education">MATLAB</a></div></div>
+        <div class="skill-cell"><h4>OPTIMIZATION</h4><div class="items"><a href="#education">GAMS</a></div></div>
+        <div class="skill-cell"><h4>SIMULATION</h4><div class="items"><a href="#education">SolidWorks</a>, <a href="#experience">ANSA</a></div></div>
+        <div class="skill-cell"><h4>PROCESS DESIGN</h4><div class="items"><a href="#work-capstone">UniSim</a></div></div>
+        <div class="skill-cell"><h4>VIDEO EDITING</h4><div class="items"><a href="#experience">DaVinci Resolve</a></div></div>
+        <div class="skill-cell"><h4>SOFT SKILLS</h4><div class="items"><a href="#experience">Project Management</a>, <a href="#experience">Leadership</a></div></div>
       </div>
       <div class="sheet-nav"><a href="#work">← SH.03 Thesis &amp; Capstone</a><a href="#training">SH.05 Training &amp; Certifications →</a></div>
     </div>
@@ -498,7 +498,7 @@
           <div class="org">Faculty of Engineering, Aristotle University of Thessaloniki</div>
           <ul>
             <li>Grade: 7.27/10 (five-year integrated program)</li>
-            <li>Selected courses: Calculation of Effects from Fires, Explosions and Toxic Dispersion · Hygiene &amp; Safety in Industry · Advanced Process Design</li>
+            <li>Selected courses: Calculation of Effects from Fires, Explosions and Toxic Dispersion · Hygiene &amp; Safety in Industry · Advanced Methods for Process Design, Synthesis and Optimization · 3D Computer Aided Design and Optimization</li>
           </ul>
         </div>
       </div>
@@ -538,10 +538,29 @@
 
   function showView(id){
     var views = document.querySelectorAll('.view');
-    var target = document.getElementById('view-' + id);
-    if(!target){ target = document.getElementById('view-hub'); id = 'hub'; }
+    var baseId = id;
+    var subTarget = null;
+    if(id.indexOf('work-') === 0){
+      baseId = 'work';
+      subTarget = id.substring(5);
+    }
+    var target = document.getElementById('view-' + baseId);
+    if(!target){ target = document.getElementById('view-hub'); baseId = 'hub'; subTarget = null; }
     views.forEach(function(v){ v.classList.remove('active'); });
     target.classList.add('active');
+
+    if(subTarget){
+      var el = document.getElementById(subTarget + '-case');
+      if(el){
+        requestAnimationFrame(function(){
+          var rect = el.getBoundingClientRect();
+          var vh = window.innerHeight;
+          var targetY = window.scrollY + rect.top - vh * 0.15;
+          window.scrollTo({ top: Math.max(targetY, 0), behavior: 'auto' });
+        });
+        return;
+      }
+    }
     window.scrollTo(0,0);
   }
 
