@@ -220,8 +220,22 @@
   .cert .title{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:16.5px;}
   .cert .sub{font-family:'IBM Plex Serif',serif;font-size:15.5px;color:var(--muted);margin-top:4px;}
   .cert-actions{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);display:flex;gap:18px;font-family:'IBM Plex Mono',monospace;font-size:13px;}
-  .cert-actions a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);transition:color 0.15s ease,text-decoration-color 0.15s ease;}
+  .cert-actions a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);transition:color 0.15s ease,text-decoration-color 0.15s ease;cursor:pointer;}
   .cert-actions a:hover{color:var(--amber);text-decoration-color:var(--amber);}
+
+  /* ---------- cert image modal ---------- */
+  .cert-modal{position:fixed;inset:0;background:rgba(8,16,26,0.92);z-index:1000;display:none;align-items:center;justify-content:center;padding:40px 20px;}
+  .cert-modal.open{display:flex;}
+  .cert-modal-frame{position:relative;max-width:min(900px,92vw);max-height:88vh;display:flex;flex-direction:column;align-items:center;}
+  .cert-modal-frame canvas{max-width:100%;max-height:78vh;width:auto;height:auto;object-fit:contain;background:#fff;border:1px solid var(--line);user-select:none;-webkit-user-drag:none;}
+  .cert-modal-loading{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);padding:40px;}
+  .cert-modal-close{position:absolute;top:-38px;right:0;background:none;border:1px solid var(--line);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:6px 12px;cursor:pointer;}
+  .cert-modal-close:hover{border-color:var(--amber);color:var(--amber);}
+  .cert-modal-nav{display:flex;align-items:center;gap:16px;margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);}
+  .cert-modal-nav button{background:none;border:1px solid var(--line);color:var(--ink);padding:6px 12px;cursor:pointer;font-family:inherit;font-size:inherit;}
+  .cert-modal-nav button:hover{border-color:var(--amber);color:var(--amber);}
+  .cert-modal-nav button:disabled{opacity:0.35;cursor:default;}
+  .cert-modal-nav button:disabled:hover{border-color:var(--line);color:var(--ink);}
 
   /* ---------- beyond row ---------- */
   .beyond-row{display:flex;gap:10px;flex-wrap:wrap;}
@@ -258,6 +272,7 @@
 
   ::selection{background:var(--amber);color:var(--bg);}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
 
@@ -462,12 +477,12 @@
         <div class="cert">
           <div class="title">Development of Interpersonal &amp; Horizontal Professional Skills in the Workplace</div>
           <div class="sub">120h Certificate of Attendance, plus UCERT certification in Team Work, Time Management &amp; Standard Office User (ISO/IEC 17024) · 2026</div>
-          <div class="cert-actions"><a href="certificates/interpersonal-horizontal-skills.pdf" target="_blank" rel="noopener">Certificate</a></div>
+          <div class="cert-actions"><a onclick="openCertModal('interpersonal-horizontal-skills');return false;">Certificate</a></div>
         </div>
         <div class="cert">
           <div class="title">3rd Hydrogen Summer School (ScH2ool)</div>
           <div class="sub">Specialized training in hydrogen technologies · 2025</div>
-          <div class="cert-actions"><a href="certificates/hydrogen-summer-school.pdf" target="_blank" rel="noopener">Certificate</a><a href="https://greenskillsforhydrogen.eu/3rd-hydrogen-summer-sch2ool-organised-in-western-macedonia/" target="_blank" rel="noopener">Course page</a></div>
+          <div class="cert-actions"><a onclick="openCertModal('hydrogen-summer-school');return false;">Certificate</a><a href="https://greenskillsforhydrogen.eu/3rd-hydrogen-summer-sch2ool-organised-in-western-macedonia/" target="_blank" rel="noopener">Course page</a></div>
         </div>
         <div class="cert">
           <div class="title">Natural, Biological and Anthropogenic Disasters &amp; Infrastructure Projects</div>
@@ -477,47 +492,47 @@
         <div class="cert">
           <div class="title">Bioprinting Ignited x Greece</div>
           <div class="sub">Certificate of Attendance · 2024</div>
-          <div class="cert-actions"><a href="certificates/bioprinting-ignited-x-greece.pdf" target="_blank" rel="noopener">Certificate</a><a href="https://www.cellink.com/bioprinting-ignited-x-greece/" target="_blank" rel="noopener">Course page</a></div>
+          <div class="cert-actions"><a onclick="openCertModal('bioprinting-ignited-x-greece');return false;">Certificate</a><a href="https://www.cellink.com/bioprinting-ignited-x-greece/" target="_blank" rel="noopener">Course page</a></div>
         </div>
         <div class="cert">
           <div class="title">Balkan Universities Search and Rescue Competition</div>
           <div class="sub">Certificate of Participation · 2024</div>
-          <div class="cert-actions"><a href="certificates/balkan-sar-competition.pdf" target="_blank" rel="noopener">Certificate</a><a href="https://international-relations.auth.gr/en/organization-of-search-and-rescue-competition-by-the-balkan-universities-association-network-in-edirne-turkey/" target="_blank" rel="noopener">Event page</a></div>
+          <div class="cert-actions"><a onclick="openCertModal('balkan-sar-competition');return false;">Certificate</a><a href="https://international-relations.auth.gr/en/organization-of-search-and-rescue-competition-by-the-balkan-universities-association-network-in-edirne-turkey/" target="_blank" rel="noopener">Event page</a></div>
         </div>
         <div class="cert">
           <div class="title">EnergyX: Sustainable Energy — Design a Renewable Future</div>
           <div class="sub">Specialized training in sustainable &amp; renewable energy design · 2023</div>
-          <div class="cert-actions"><a href="certificates/energyx-delftx.pdf" target="_blank" rel="noopener">Certificate</a><a href="https://ocw.tudelft.nl/courses/sustainable-energy-design-renewable-future/" target="_blank" rel="noopener">Course page</a></div>
+          <div class="cert-actions"><a onclick="openCertModal('energyx-delftx');return false;">Certificate</a><a href="https://ocw.tudelft.nl/courses/sustainable-energy-design-renewable-future/" target="_blank" rel="noopener">Course page</a></div>
         </div>
         <div class="cert">
           <div class="title">Balkan Veterans Athletics Championships, Thessaloniki</div>
           <div class="sub">Certificate of Volunteering · 2022</div>
-          <div class="cert-actions"><a href="certificates/balkan-veterans-athletics-volunteering.pdf" target="_blank" rel="noopener">Certificate</a><a href="https://bamacs2022.wixsite.com/thessaloniki" target="_blank" rel="noopener">Event page</a></div>
+          <div class="cert-actions"><a onclick="openCertModal('balkan-veterans-athletics-volunteering');return false;">Certificate</a><a href="https://bamacs2022.wixsite.com/thessaloniki" target="_blank" rel="noopener">Event page</a></div>
         </div>
         <div class="cert">
           <div class="title">Modern Tools for Work, Collaboration, and Remote Work</div>
           <div class="sub">Certificate of Completion · 2022</div>
-          <div class="cert-actions"><a href="certificates/modern-tools-for-work.pdf" target="_blank" rel="noopener">Certificate</a></div>
+          <div class="cert-actions"><a onclick="openCertModal('modern-tools-for-work');return false;">Certificate</a></div>
         </div>
         <div class="cert">
           <div class="title">BADGE Conference, Wernigerode</div>
           <div class="sub">Certificate of Attendance · 2022</div>
-          <div class="cert-actions"><a href="certificates/badge-conference-wernigerode.pdf" target="_blank" rel="noopener">Certificate</a></div>
+          <div class="cert-actions"><a onclick="openCertModal('badge-conference-wernigerode');return false;">Certificate</a></div>
         </div>
         <div class="cert">
           <div class="title">White Tower Forum</div>
           <div class="sub">Certificate of Attendance · 2022</div>
-          <div class="cert-actions"><a href="certificates/white-tower-forum.pdf" target="_blank" rel="noopener">Certificate</a><a href="https://www.enve-lab.eu/index.php/συνεδριο-29-06-2022-30-06-2022/" target="_blank" rel="noopener">Event page</a></div>
+          <div class="cert-actions"><a onclick="openCertModal('white-tower-forum');return false;">Certificate</a><a href="https://www.enve-lab.eu/index.php/συνεδριο-29-06-2022-30-06-2022/" target="_blank" rel="noopener">Event page</a></div>
         </div>
         <div class="cert">
           <div class="title">BADGE (Becoming a Digital Global Engineer)</div>
           <div class="sub">Certificate of Completion · 2022</div>
-          <div class="cert-actions"><a href="certificates/badge-digital-global-engineer.pdf" target="_blank" rel="noopener">Certificate</a></div>
+          <div class="cert-actions"><a onclick="openCertModal('badge-digital-global-engineer');return false;">Certificate</a></div>
         </div>
         <div class="cert">
           <div class="title">INCLUDE</div>
           <div class="sub">Certificate of Completion · 2021</div>
-          <div class="cert-actions"><a href="certificates/include.pdf" target="_blank" rel="noopener">Certificate</a></div>
+          <div class="cert-actions"><a onclick="openCertModal('include');return false;">Certificate</a></div>
         </div>
       </div>
       <div class="sheet-nav"><a href="#skills">← SH.04 Skills &amp; Technologies</a><a href="#beyond">SH.06 Beyond Engineering →</a></div>
@@ -603,8 +618,109 @@
 
 </div>
 
+<div class="cert-modal" id="cert-modal">
+  <div class="cert-modal-frame">
+    <button class="cert-modal-close" onclick="closeCertModal()">Close ✕</button>
+    <div class="cert-modal-loading" id="cert-modal-loading">Loading certificate…</div>
+    <canvas id="cert-modal-canvas" style="display:none;"></canvas>
+    <div class="cert-modal-nav" id="cert-modal-nav" style="display:none;">
+      <button id="cert-modal-prev" onclick="certModalStep(-1)">← Prev</button>
+      <span id="cert-modal-pageinfo"></span>
+      <button id="cert-modal-next" onclick="certModalStep(1)">Next →</button>
+    </div>
+  </div>
+</div>
+
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  if(window.pdfjsLib){
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+
+  var certModalState = { base:null, doc:null, pages:1, current:1 };
+  var certModalDocs = {};
+
+  function certModalRenderPage(){
+    var canvas = document.getElementById('cert-modal-canvas');
+    var loading = document.getElementById('cert-modal-loading');
+    var nav = document.getElementById('cert-modal-nav');
+    var pageinfo = document.getElementById('cert-modal-pageinfo');
+    var prevBtn = document.getElementById('cert-modal-prev');
+    var nextBtn = document.getElementById('cert-modal-next');
+
+    canvas.style.display = 'none';
+    loading.style.display = 'block';
+    loading.textContent = 'Loading certificate…';
+
+    certModalState.doc.getPage(certModalState.current).then(function(page){
+      var scale = Math.min(2, (window.innerWidth * 0.9) / page.getViewport({scale:1}).width);
+      var viewport = page.getViewport({ scale: Math.max(scale, 1) });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      var ctx = canvas.getContext('2d');
+      page.render({ canvasContext: ctx, viewport: viewport }).promise.then(function(){
+        loading.style.display = 'none';
+        canvas.style.display = 'block';
+      });
+    });
+
+    if(certModalState.pages > 1){
+      nav.style.display = 'flex';
+      pageinfo.textContent = certModalState.current + ' / ' + certModalState.pages;
+      prevBtn.disabled = certModalState.current === 1;
+      nextBtn.disabled = certModalState.current === certModalState.pages;
+    } else {
+      nav.style.display = 'none';
+    }
+  }
+
+  function openCertModal(base){
+    document.getElementById('cert-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    var canvas = document.getElementById('cert-modal-canvas');
+    var loading = document.getElementById('cert-modal-loading');
+    canvas.style.display = 'none';
+    loading.style.display = 'block';
+    loading.textContent = 'Loading certificate…';
+    document.getElementById('cert-modal-nav').style.display = 'none';
+
+    if(certModalDocs[base]){
+      certModalState = { base: base, doc: certModalDocs[base], pages: certModalDocs[base].numPages, current: 1 };
+      certModalRenderPage();
+      return;
+    }
+
+    pdfjsLib.getDocument('certificates/' + base + '.pdf').promise.then(function(doc){
+      certModalDocs[base] = doc;
+      certModalState = { base: base, doc: doc, pages: doc.numPages, current: 1 };
+      certModalRenderPage();
+    }).catch(function(){
+      loading.textContent = 'Could not load this certificate.';
+    });
+  }
+
+  function closeCertModal(){
+    document.getElementById('cert-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function certModalStep(delta){
+    var next = certModalState.current + delta;
+    if(next < 1 || next > certModalState.pages) return;
+    certModalState.current = next;
+    certModalRenderPage();
+  }
+
+  document.getElementById('cert-modal').addEventListener('click', function(e){
+    if(e.target.id === 'cert-modal') closeCertModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if(!document.getElementById('cert-modal').classList.contains('open')) return;
+    if(e.key === 'Escape') closeCertModal();
+    if(e.key === 'ArrowLeft') certModalStep(-1);
+    if(e.key === 'ArrowRight') certModalStep(1);
+  });
 
   function showView(id){
     var views = document.querySelectorAll('.view');
