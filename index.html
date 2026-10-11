@@ -217,11 +217,11 @@
   .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
   @media (max-width:600px){ .cert-grid{grid-template-columns:1fr;} }
   .cert{background:var(--bg-2);border:1px solid var(--line);padding:18px 20px;}
-  a.cert{display:block;color:inherit;text-decoration:none;transition:background 0.15s ease;}
-  a.cert:hover{background:var(--bg-3);}
-  a.cert .title{color:var(--amber);}
   .cert .title{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:16.5px;}
   .cert .sub{font-family:'IBM Plex Serif',serif;font-size:15.5px;color:var(--muted);margin-top:4px;}
+  .cert-actions{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);display:flex;gap:18px;font-family:'IBM Plex Mono',monospace;font-size:13px;}
+  .cert-actions a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);transition:color 0.15s ease,text-decoration-color 0.15s ease;}
+  .cert-actions a:hover{color:var(--amber);text-decoration-color:var(--amber);}
 
   /* ---------- beyond row ---------- */
   .beyond-row{display:flex;gap:10px;flex-wrap:wrap;}
@@ -459,18 +459,66 @@
     </div>
     <div class="view-body">
       <div class="cert-grid">
-        <a class="cert" href="certificates/interpersonal-horizontal-skills.pdf" target="_blank" rel="noopener"><div class="title">Development of Interpersonal &amp; Horizontal Professional Skills in the Workplace</div><div class="sub">120h Certificate of Attendance, plus UCERT certification in Team Work, Time Management &amp; Standard Office User (ISO/IEC 17024) · 2026</div></a>
-        <a class="cert" href="certificates/hydrogen-summer-school.pdf" target="_blank" rel="noopener"><div class="title">3rd Hydrogen Summer School (ScH2ool)</div><div class="sub">Specialized training in hydrogen technologies · 2025</div></a>
-        <a class="cert" href="https://sst.eap.gr/ndss/" target="_blank" rel="noopener"><div class="title">Natural, Biological and Anthropogenic Disasters &amp; Infrastructure Projects</div><div class="sub">Specialized training in natural, biological &amp; anthropogenic disaster risk management · 2025</div></a>
-        <a class="cert" href="certificates/bioprinting-ignited-x-greece.pdf" target="_blank" rel="noopener"><div class="title">Bioprinting Ignited x Greece</div><div class="sub">Certificate of Attendance · 2024</div></a>
-        <a class="cert" href="certificates/balkan-sar-competition.pdf" target="_blank" rel="noopener"><div class="title">Balkan Universities Search and Rescue Competition</div><div class="sub">Certificate of Participation · 2024</div></a>
-        <a class="cert" href="certificates/energyx-delftx.pdf" target="_blank" rel="noopener"><div class="title">EnergyX: Sustainable Energy — Design a Renewable Future</div><div class="sub">Specialized training in sustainable &amp; renewable energy design · 2023</div></a>
-        <a class="cert" href="certificates/balkan-veterans-athletics-volunteering.pdf" target="_blank" rel="noopener"><div class="title">Balkan Veterans Athletics Championships, Thessaloniki</div><div class="sub">Certificate of Volunteering · 2022</div></a>
-        <a class="cert" href="certificates/modern-tools-for-work.pdf" target="_blank" rel="noopener"><div class="title">Modern Tools for Work, Collaboration, and Remote Work</div><div class="sub">Certificate of Completion · 2022</div></a>
-        <a class="cert" href="certificates/badge-conference-wernigerode.pdf" target="_blank" rel="noopener"><div class="title">BADGE Conference, Wernigerode</div><div class="sub">Certificate of Attendance · 2022</div></a>
-        <a class="cert" href="certificates/white-tower-forum.pdf" target="_blank" rel="noopener"><div class="title">White Tower Forum</div><div class="sub">Certificate of Attendance · 2022</div></a>
-        <a class="cert" href="certificates/badge-digital-global-engineer.pdf" target="_blank" rel="noopener"><div class="title">BADGE (Becoming a Digital Global Engineer)</div><div class="sub">Certificate of Completion · 2022</div></a>
-        <a class="cert" href="certificates/include.pdf" target="_blank" rel="noopener"><div class="title">INCLUDE</div><div class="sub">Certificate of Completion · 2021</div></a>
+        <div class="cert">
+          <div class="title">Development of Interpersonal &amp; Horizontal Professional Skills in the Workplace</div>
+          <div class="sub">120h Certificate of Attendance, plus UCERT certification in Team Work, Time Management &amp; Standard Office User (ISO/IEC 17024) · 2026</div>
+          <div class="cert-actions"><a href="certificates/interpersonal-horizontal-skills.pdf" target="_blank" rel="noopener">Certificate</a></div>
+        </div>
+        <div class="cert">
+          <div class="title">3rd Hydrogen Summer School (ScH2ool)</div>
+          <div class="sub">Specialized training in hydrogen technologies · 2025</div>
+          <div class="cert-actions"><a href="certificates/hydrogen-summer-school.pdf" target="_blank" rel="noopener">Certificate</a><a href="https://greenskillsforhydrogen.eu/3rd-hydrogen-summer-sch2ool-organised-in-western-macedonia/" target="_blank" rel="noopener">Course page</a></div>
+        </div>
+        <div class="cert">
+          <div class="title">Natural, Biological and Anthropogenic Disasters &amp; Infrastructure Projects</div>
+          <div class="sub">Specialized training in natural, biological &amp; anthropogenic disaster risk management · 2025</div>
+          <div class="cert-actions"><a href="https://sst.eap.gr/ndss/" target="_blank" rel="noopener">Course page</a></div>
+        </div>
+        <div class="cert">
+          <div class="title">Bioprinting Ignited x Greece</div>
+          <div class="sub">Certificate of Attendance · 2024</div>
+          <div class="cert-actions"><a href="certificates/bioprinting-ignited-x-greece.pdf" target="_blank" rel="noopener">Certificate</a><a href="https://www.cellink.com/bioprinting-ignited-x-greece/" target="_blank" rel="noopener">Course page</a></div>
+        </div>
+        <div class="cert">
+          <div class="title">Balkan Universities Search and Rescue Competition</div>
+          <div class="sub">Certificate of Participation · 2024</div>
+          <div class="cert-actions"><a href="certificates/balkan-sar-competition.pdf" target="_blank" rel="noopener">Certificate</a><a href="https://international-relations.auth.gr/en/organization-of-search-and-rescue-competition-by-the-balkan-universities-association-network-in-edirne-turkey/" target="_blank" rel="noopener">Event page</a></div>
+        </div>
+        <div class="cert">
+          <div class="title">EnergyX: Sustainable Energy — Design a Renewable Future</div>
+          <div class="sub">Specialized training in sustainable &amp; renewable energy design · 2023</div>
+          <div class="cert-actions"><a href="certificates/energyx-delftx.pdf" target="_blank" rel="noopener">Certificate</a><a href="https://ocw.tudelft.nl/courses/sustainable-energy-design-renewable-future/" target="_blank" rel="noopener">Course page</a></div>
+        </div>
+        <div class="cert">
+          <div class="title">Balkan Veterans Athletics Championships, Thessaloniki</div>
+          <div class="sub">Certificate of Volunteering · 2022</div>
+          <div class="cert-actions"><a href="certificates/balkan-veterans-athletics-volunteering.pdf" target="_blank" rel="noopener">Certificate</a><a href="https://bamacs2022.wixsite.com/thessaloniki" target="_blank" rel="noopener">Event page</a></div>
+        </div>
+        <div class="cert">
+          <div class="title">Modern Tools for Work, Collaboration, and Remote Work</div>
+          <div class="sub">Certificate of Completion · 2022</div>
+          <div class="cert-actions"><a href="certificates/modern-tools-for-work.pdf" target="_blank" rel="noopener">Certificate</a></div>
+        </div>
+        <div class="cert">
+          <div class="title">BADGE Conference, Wernigerode</div>
+          <div class="sub">Certificate of Attendance · 2022</div>
+          <div class="cert-actions"><a href="certificates/badge-conference-wernigerode.pdf" target="_blank" rel="noopener">Certificate</a></div>
+        </div>
+        <div class="cert">
+          <div class="title">White Tower Forum</div>
+          <div class="sub">Certificate of Attendance · 2022</div>
+          <div class="cert-actions"><a href="certificates/white-tower-forum.pdf" target="_blank" rel="noopener">Certificate</a><a href="https://www.enve-lab.eu/index.php/συνεδριο-29-06-2022-30-06-2022/" target="_blank" rel="noopener">Event page</a></div>
+        </div>
+        <div class="cert">
+          <div class="title">BADGE (Becoming a Digital Global Engineer)</div>
+          <div class="sub">Certificate of Completion · 2022</div>
+          <div class="cert-actions"><a href="certificates/badge-digital-global-engineer.pdf" target="_blank" rel="noopener">Certificate</a></div>
+        </div>
+        <div class="cert">
+          <div class="title">INCLUDE</div>
+          <div class="sub">Certificate of Completion · 2021</div>
+          <div class="cert-actions"><a href="certificates/include.pdf" target="_blank" rel="noopener">Certificate</a></div>
+        </div>
       </div>
       <div class="sheet-nav"><a href="#skills">← SH.04 Skills &amp; Technologies</a><a href="#beyond">SH.06 Beyond Engineering →</a></div>
     </div>
